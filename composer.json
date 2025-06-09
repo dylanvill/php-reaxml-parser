@@ -1,17 +1,22 @@
 {
-    "name": "ad-group/laravel-reaxml-parser",
-    "description": "Creates PHP objects out of REAXML files",
-    "autoload": {
-        "psr-4": {
-            "AdGroup\\ReaxmlParser\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Dylan Villaruel"
-        }
-    ],
-    "require-dev": {
-        "orchestra/testbench": "^10.4"
+  "name": "ad-group/laravel-reaxml-parser",
+  "description": "Creates PHP objects out of REAXML files",
+  "autoload": {
+    "psr-4": {
+      "AdGroup\\ReaxmlParser\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AdGroup\\ReaxmlParser\\Tests": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Dylan Villaruel"
+    }
+  ],
+  "require-dev": {
+    "orchestra/testbench": "^10.4"
+  }
 }
