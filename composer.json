@@ -1,0 +1,15 @@
+{
+    "name": "ad-group/laravel-reaxml-parser",
+    "description": "Creates PHP objects out of REAXML files",
+    "autoload": {
+        "psr-4": {
+            "AdGroup\\LaravelReaxmlParser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dylan Villaruel"
+        }
+    ],
+    "require": {}
+}
