@@ -2,32 +2,34 @@
 
 namespace AdGroup\ReaxmlParser\Tests\Nodes;
 
+use AdGroup\ReaxmlParser\Exceptions\IncorrectNodeArgument;
 use AdGroup\ReaxmlParser\Nodes\Site;
-use AdGroup\ReaxmlParser\Tests\Contracts\TestsNodeTextValue;
-use AdGroup\ReaxmlParser\Tests\Traits\HasNodeTextTesting;
 use Orchestra\Testbench\TestCase;
-use SimpleXMLElement;
 
-class SiteTest extends TestCase implements TestsNodeTextValue
+class SiteTest extends TestCase
 {
-
-    use HasNodeTextTesting;
-
-    public function getExpectedText(): string
+    public function test_text_from_node_is_correct(): void
     {
-        return 'site text';
+        $text = "sample site text";
+        $xml = simplexml_load_string("<site>{$text}</site>");
+        $instance = new Site($xml);
+
+        $this->assertEquals($text, $instance->text);
     }
 
-    public function getXmlNode(): SimpleXMLElement
+    public function test_text_is_null_when_node_does_not_have_any_text(): void
     {
-        $text = $this->getExpectedText();
-        $xml = simplexml_load_string("<site>" . $text . "</site>");
+        $xml = simplexml_load_string("<site></site>");
+        $instance = new Site($xml);
 
-        return $xml;
+        $this->assertNull($instance->text);
     }
 
-    public function getNodeClassInstance(): object
+    public function test_throws_error_when_node_received_is_incorrect(): void
     {
-        return new Site($this->getXmlNode());
+        $this->expectException(IncorrectNodeArgument::class);
+
+        $xml = simplexml_load_string("<wrongNode></wrongNode>");
+        new Site($xml);
     }
 }
