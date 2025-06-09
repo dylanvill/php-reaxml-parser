@@ -1,0 +1,62 @@
+<?php
+
+namespace App\ReaXml\Nodes;
+
+use App\ReaXml\Nodes\Floorplan;
+use App\ReaXml\Nodes\Img;
+use App\ReaXml\Nodes\Document;
+use App\ReaXml\Traits\HasNodeValidation;
+use SimpleXMLElement;
+
+class Objects
+{
+    const NODE_NAME = "objects";
+
+    use HasNodeValidation;
+
+    /** @var Array<Floorplan> */
+    public ?array $floorplan = null;
+
+    /** @var Array<Img> */
+    public ?array $img = null;
+
+    /** @var Array<Document> */
+    public ?array $document = null;
+
+    public function __construct(SimpleXMLElement $node)
+    {
+        $this->validateNodeName(self::NODE_NAME, $node);
+        $this->mapNodes($node);
+    }
+
+    private function mapNodes(SimpleXMLElement $node): void
+    {
+        $mapping = [
+            Floorplan::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->floorplan[] = new Floorplan($element);
+                    }
+                }
+            },
+            Img::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->img[] = new Img($element);
+                    }
+                }
+            },
+            Document::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->document[] = new Document($element);
+                    }
+                }
+            },
+        ];
+
+        foreach ($mapping as $key => $callback) {
+            $callback($node->xpath($key));
+        }
+    }
+}
