@@ -3,7 +3,7 @@
     "description": "Creates PHP objects out of REAXML files",
     "autoload": {
         "psr-4": {
-            "AdGroup\\LaravelReaxmlParser\\": "src/"
+            "AdGroup\\ReaxmlParser\\": "src/"
         }
     },
     "authors": [
