@@ -1,10 +1,10 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Traits\HasNodeValidation;
-use App\ReaXml\Nodes\Page;
-use App\ReaXml\Nodes\Reference;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Nodes\Page;
+use AdGroup\ReaxmlParser\Nodes\Reference;
 use SimpleXMLElement;
 
 class StreetDirectory

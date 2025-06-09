@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ReaXml\Exceptions;
+namespace AdGroup\ReaxmlParser\Exceptions;
 
 use Exception;
 

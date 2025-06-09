@@ -1,14 +1,14 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Traits\HasText;
-use App\ReaXml\Nodes\Range;
-use App\ReaXml\Nodes\Price;
-use App\ReaXml\Nodes\SoldPrice;
-use App\ReaXml\Nodes\Date;
-use App\ReaXml\Nodes\SoldDate;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\HasText;
+use AdGroup\ReaxmlParser\Nodes\Range;
+use AdGroup\ReaxmlParser\Nodes\Price;
+use AdGroup\ReaxmlParser\Nodes\SoldPrice;
+use AdGroup\ReaxmlParser\Nodes\Date;
+use AdGroup\ReaxmlParser\Nodes\SoldDate;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class SoldDetails

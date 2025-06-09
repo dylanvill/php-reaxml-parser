@@ -1,16 +1,16 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\FirstHomeBuyer;
-use App\ReaXml\Nodes\Investors;
-use App\ReaXml\Nodes\Downsizing;
-use App\ReaXml\Nodes\Couples;
-use App\ReaXml\Nodes\Students;
-use App\ReaXml\Nodes\LrgFamilies;
-use App\ReaXml\Nodes\Retirees;
-use App\ReaXml\Traits\HasNodeValidation;
-use App\ReaXml\Traits\HasText;
+use AdGroup\ReaxmlParser\Nodes\FirstHomeBuyer;
+use AdGroup\ReaxmlParser\Nodes\Investors;
+use AdGroup\ReaxmlParser\Nodes\Downsizing;
+use AdGroup\ReaxmlParser\Nodes\Couples;
+use AdGroup\ReaxmlParser\Nodes\Students;
+use AdGroup\ReaxmlParser\Nodes\LrgFamilies;
+use AdGroup\ReaxmlParser\Nodes\Retirees;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\HasText;
 use SimpleXMLElement;
 
 class IdealFor

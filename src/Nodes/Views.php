@@ -1,14 +1,14 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Traits\HasText;
-use App\ReaXml\Nodes\City;
-use App\ReaXml\Nodes\Water;
-use App\ReaXml\Nodes\Valley;
-use App\ReaXml\Nodes\Mountain;
-use App\ReaXml\Nodes\Ocean;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\HasText;
+use AdGroup\ReaxmlParser\Nodes\City;
+use AdGroup\ReaxmlParser\Nodes\Water;
+use AdGroup\ReaxmlParser\Nodes\Valley;
+use AdGroup\ReaxmlParser\Nodes\Mountain;
+use AdGroup\ReaxmlParser\Nodes\Ocean;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class Views

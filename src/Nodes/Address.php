@@ -1,19 +1,19 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Enums\YesNoEnum;
-use App\ReaXml\Nodes\Site;
-use App\ReaXml\Nodes\SubNumber;
-use App\ReaXml\Nodes\LotNumber;
-use App\ReaXml\Nodes\StreetNumber;
-use App\ReaXml\Nodes\Street;
-use App\ReaXml\Nodes\Suburb;
-use App\ReaXml\Nodes\State;
-use App\ReaXml\Nodes\Postcode;
-use App\ReaXml\Nodes\Region;
-use App\ReaXml\Nodes\Country;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Enums\YesNoEnum;
+use AdGroup\ReaxmlParser\Nodes\Site;
+use AdGroup\ReaxmlParser\Nodes\SubNumber;
+use AdGroup\ReaxmlParser\Nodes\LotNumber;
+use AdGroup\ReaxmlParser\Nodes\StreetNumber;
+use AdGroup\ReaxmlParser\Nodes\Street;
+use AdGroup\ReaxmlParser\Nodes\Suburb;
+use AdGroup\ReaxmlParser\Nodes\State;
+use AdGroup\ReaxmlParser\Nodes\Postcode;
+use AdGroup\ReaxmlParser\Nodes\Region;
+use AdGroup\ReaxmlParser\Nodes\Country;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class Address

@@ -1,36 +1,36 @@
 <?php
 
-namespace App\ReaXml\ListingTypes;
+namespace AdGroup\ReaxmlParser\ListingTypes;
 
-use App\ReaXml\Enums\ListingStatusEnum;
-use App\ReaXml\Nodes\AgentId;
-use App\ReaXml\Nodes\UniqueId;
-use App\ReaXml\Nodes\ListingAgent;
-use App\ReaXml\Nodes\DateAvailable;
-use App\ReaXml\Nodes\Rent;
-use App\ReaXml\Nodes\PriceView;
-use App\ReaXml\Nodes\Bond;
-use App\ReaXml\Nodes\DepositTaken;
-use App\ReaXml\Nodes\Address;
-use App\ReaXml\Nodes\Municipality;
-use App\ReaXml\Nodes\StreetDirectory;
-use App\ReaXml\Nodes\Category;
-use App\ReaXml\Nodes\Headline;
-use App\ReaXml\Nodes\Description;
-use App\ReaXml\Nodes\Features;
-use App\ReaXml\Nodes\Holiday;
-use App\ReaXml\Nodes\LandDetails;
-use App\ReaXml\Nodes\NewConstruction;
-use App\ReaXml\Nodes\BuildingDetails;
-use App\ReaXml\Nodes\InspectionTimes;
-use App\ReaXml\Nodes\ExternalLink;
-use App\ReaXml\Nodes\VideoLink;
-use App\ReaXml\Nodes\ExtraFields;
-use App\ReaXml\Nodes\Images;
-use App\ReaXml\Nodes\Objects;
-use App\ReaXml\Nodes\EcoFriendly;
-use App\ReaXml\Nodes\Views;
-use App\ReaXml\Nodes\Allowances;
+use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
+use AdGroup\ReaxmlParser\Nodes\AgentId;
+use AdGroup\ReaxmlParser\Nodes\UniqueId;
+use AdGroup\ReaxmlParser\Nodes\ListingAgent;
+use AdGroup\ReaxmlParser\Nodes\DateAvailable;
+use AdGroup\ReaxmlParser\Nodes\Rent;
+use AdGroup\ReaxmlParser\Nodes\PriceView;
+use AdGroup\ReaxmlParser\Nodes\Bond;
+use AdGroup\ReaxmlParser\Nodes\DepositTaken;
+use AdGroup\ReaxmlParser\Nodes\Address;
+use AdGroup\ReaxmlParser\Nodes\Municipality;
+use AdGroup\ReaxmlParser\Nodes\StreetDirectory;
+use AdGroup\ReaxmlParser\Nodes\Category;
+use AdGroup\ReaxmlParser\Nodes\Headline;
+use AdGroup\ReaxmlParser\Nodes\Description;
+use AdGroup\ReaxmlParser\Nodes\Features;
+use AdGroup\ReaxmlParser\Nodes\Holiday;
+use AdGroup\ReaxmlParser\Nodes\LandDetails;
+use AdGroup\ReaxmlParser\Nodes\NewConstruction;
+use AdGroup\ReaxmlParser\Nodes\BuildingDetails;
+use AdGroup\ReaxmlParser\Nodes\InspectionTimes;
+use AdGroup\ReaxmlParser\Nodes\ExternalLink;
+use AdGroup\ReaxmlParser\Nodes\VideoLink;
+use AdGroup\ReaxmlParser\Nodes\ExtraFields;
+use AdGroup\ReaxmlParser\Nodes\Images;
+use AdGroup\ReaxmlParser\Nodes\Objects;
+use AdGroup\ReaxmlParser\Nodes\EcoFriendly;
+use AdGroup\ReaxmlParser\Nodes\Views;
+use AdGroup\ReaxmlParser\Nodes\Allowances;
 
 use SimpleXMLElement;
 

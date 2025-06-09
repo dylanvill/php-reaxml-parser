@@ -1,11 +1,11 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\AuctionResult;
-use App\ReaXml\Nodes\AuctionDate;
-use App\ReaXml\Nodes\AuctionMaxBid;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Nodes\AuctionResult;
+use AdGroup\ReaxmlParser\Nodes\AuctionDate;
+use AdGroup\ReaxmlParser\Nodes\AuctionMaxBid;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class AuctionOutcome

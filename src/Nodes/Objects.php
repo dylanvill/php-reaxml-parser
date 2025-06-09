@@ -1,11 +1,11 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\Floorplan;
-use App\ReaXml\Nodes\Img;
-use App\ReaXml\Nodes\Document;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Nodes\Floorplan;
+use AdGroup\ReaxmlParser\Nodes\Img;
+use AdGroup\ReaxmlParser\Nodes\Document;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class Objects

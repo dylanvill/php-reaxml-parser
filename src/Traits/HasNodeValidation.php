@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ReaXml\Traits;
+namespace AdGroup\ReaxmlParser\Traits;
 
-use App\ReaXml\Exceptions\IncorrectNodeArgument;
+use AdGroup\ReaxmlParser\Exceptions\IncorrectNodeArgument;
 use SimpleXMLElement;
 
 trait HasNodeValidation

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
 use SimpleXMLElement;
-use App\ReaXml\Nodes\Attachment;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Nodes\Attachment;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 
 class Media
 {

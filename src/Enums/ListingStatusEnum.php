@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ReaXml\Enums;
+namespace AdGroup\ReaxmlParser\Enums;
 
 enum ListingStatusEnum: string
 {

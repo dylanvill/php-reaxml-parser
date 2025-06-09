@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ReaXml\Traits;
+namespace AdGroup\ReaxmlParser\Traits;
 
 use SimpleXMLElement;
 

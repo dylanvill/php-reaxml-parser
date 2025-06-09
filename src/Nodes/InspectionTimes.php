@@ -1,10 +1,10 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Traits\HasText;
-use App\ReaXml\Nodes\Inspection;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\HasText;
+use AdGroup\ReaxmlParser\Nodes\Inspection;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class InspectionTimes

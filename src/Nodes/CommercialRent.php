@@ -1,11 +1,11 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Enums\TaxEnum;
-use App\ReaXml\Enums\YesNoEnum;
-use App\ReaXml\Traits\HasText;
-use App\ReaXml\Nodes\RentPerSquareMetre;
+use AdGroup\ReaxmlParser\Enums\TaxEnum;
+use AdGroup\ReaxmlParser\Enums\YesNoEnum;
+use AdGroup\ReaxmlParser\Traits\HasText;
+use AdGroup\ReaxmlParser\Nodes\RentPerSquareMetre;
 use SimpleXMLElement;
 
 class CommercialRent

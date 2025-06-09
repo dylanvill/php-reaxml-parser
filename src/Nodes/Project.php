@@ -1,10 +1,10 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\Id;
-use App\ReaXml\Nodes\Order;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Nodes\Id;
+use AdGroup\ReaxmlParser\Nodes\Order;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class Project

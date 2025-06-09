@@ -1,10 +1,10 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\EField;
-use App\ReaXml\Traits\HasNodeValidation;
-use App\ReaXml\Traits\HasText;
+use AdGroup\ReaxmlParser\Nodes\EField;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\HasText;
 use SimpleXMLElement;
 
 class ExtraFields

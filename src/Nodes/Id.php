@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Traits\HasText;
+use AdGroup\ReaxmlParser\Traits\HasText;
 use SimpleXMLElement;
 
 class Id

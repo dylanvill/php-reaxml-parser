@@ -1,11 +1,11 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Enums\YesNoEnum;
-use App\ReaXml\Traits\HasText;
-use App\ReaXml\Nodes\Range;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Enums\YesNoEnum;
+use AdGroup\ReaxmlParser\Traits\HasText;
+use AdGroup\ReaxmlParser\Nodes\Range;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class Price

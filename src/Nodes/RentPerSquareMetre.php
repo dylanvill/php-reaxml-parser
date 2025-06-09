@@ -1,9 +1,9 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Traits\HasText;
-use App\ReaXml\Nodes\Range;
+use AdGroup\ReaxmlParser\Traits\HasText;
+use AdGroup\ReaxmlParser\Nodes\Range;
 use SimpleXMLElement;
 
 class RentPerSquareMetre

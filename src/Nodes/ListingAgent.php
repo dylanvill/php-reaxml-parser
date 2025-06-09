@@ -1,19 +1,19 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Contracts\MapsNodes;
-use App\ReaXml\Enums\YesNoEnum;
-use App\ReaXml\Nodes\AgentId;
-use App\ReaXml\Nodes\Name;
-use App\ReaXml\Nodes\Telephone;
-use App\ReaXml\Nodes\Email;
-use App\ReaXml\Nodes\TwitterUrl;
-use App\ReaXml\Nodes\FacebookUrl;
-use App\ReaXml\Nodes\LinkedInUrl;
-use App\ReaXml\Nodes\UniqueListingAgentId;
-use App\ReaXml\Nodes\Media;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Contracts\MapsNodes;
+use AdGroup\ReaxmlParser\Enums\YesNoEnum;
+use AdGroup\ReaxmlParser\Nodes\AgentId;
+use AdGroup\ReaxmlParser\Nodes\Name;
+use AdGroup\ReaxmlParser\Nodes\Telephone;
+use AdGroup\ReaxmlParser\Nodes\Email;
+use AdGroup\ReaxmlParser\Nodes\TwitterUrl;
+use AdGroup\ReaxmlParser\Nodes\FacebookUrl;
+use AdGroup\ReaxmlParser\Nodes\LinkedInUrl;
+use AdGroup\ReaxmlParser\Nodes\UniqueListingAgentId;
+use AdGroup\ReaxmlParser\Nodes\Media;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class ListingAgent

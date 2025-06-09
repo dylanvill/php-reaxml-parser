@@ -1,12 +1,12 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\SolarPanels;
-use App\ReaXml\Nodes\SolarHotWater;
-use App\ReaXml\Nodes\WaterTank;
-use App\ReaXml\Nodes\GreyWaterSystem;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Nodes\SolarPanels;
+use AdGroup\ReaxmlParser\Nodes\SolarHotWater;
+use AdGroup\ReaxmlParser\Nodes\WaterTank;
+use AdGroup\ReaxmlParser\Nodes\GreyWaterSystem;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class EcoFriendly

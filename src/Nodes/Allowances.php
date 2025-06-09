@@ -1,10 +1,10 @@
 <?php 
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\PetFriendly;
-use App\ReaXml\Nodes\Furnished;
-use App\ReaXml\Nodes\Smokers;
+use AdGroup\ReaxmlParser\Nodes\PetFriendly;
+use AdGroup\ReaxmlParser\Nodes\Furnished;
+use AdGroup\ReaxmlParser\Nodes\Smokers;
 use SimpleXMLElement;
 
 class Allowances {

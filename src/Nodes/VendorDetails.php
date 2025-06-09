@@ -1,12 +1,12 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
 use SimpleXMLElement;
-use App\ReaXml\Nodes\Name;
-use App\ReaXml\Nodes\Telephone;
-use App\ReaXml\Nodes\Email;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Nodes\Name;
+use AdGroup\ReaxmlParser\Nodes\Telephone;
+use AdGroup\ReaxmlParser\Nodes\Email;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 
 class VendorDetails
 {

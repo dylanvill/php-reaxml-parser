@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
 class Upgrade
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\Area;
-use App\ReaXml\Nodes\Frontage;
-use App\ReaXml\Nodes\Depth;
-use App\ReaXml\Nodes\CrossOver;
-use App\ReaXml\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Nodes\Area;
+use AdGroup\ReaxmlParser\Nodes\Frontage;
+use AdGroup\ReaxmlParser\Nodes\Depth;
+use AdGroup\ReaxmlParser\Nodes\CrossOver;
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use SimpleXMLElement;
 
 class LandDetails

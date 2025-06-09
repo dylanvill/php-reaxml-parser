@@ -1,15 +1,15 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Nodes\Fencing;
-use App\ReaXml\Nodes\AnnualRainfall;
-use App\ReaXml\Nodes\SoilTypes;
-use App\ReaXml\Nodes\Improvements;
-use App\ReaXml\Nodes\CouncilRates;
-use App\ReaXml\Nodes\Irrigation;
-use App\ReaXml\Nodes\CarryingCapacity;
-use App\ReaXml\Nodes\Services;
+use AdGroup\ReaxmlParser\Nodes\Fencing;
+use AdGroup\ReaxmlParser\Nodes\AnnualRainfall;
+use AdGroup\ReaxmlParser\Nodes\SoilTypes;
+use AdGroup\ReaxmlParser\Nodes\Improvements;
+use AdGroup\ReaxmlParser\Nodes\CouncilRates;
+use AdGroup\ReaxmlParser\Nodes\Irrigation;
+use AdGroup\ReaxmlParser\Nodes\CarryingCapacity;
+use AdGroup\ReaxmlParser\Nodes\Services;
 use SimpleXMLElement;
 
 class RuralFeatures

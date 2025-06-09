@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
-use App\ReaXml\Enums\YesNoEnum;
+use AdGroup\ReaxmlParser\Enums\YesNoEnum;
 use SimpleXMLElement;
 
 class CommercialListingType

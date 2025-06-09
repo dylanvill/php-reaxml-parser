@@ -1,9 +1,9 @@
 <?php
 
-namespace App\ReaXml\Nodes;
+namespace AdGroup\ReaxmlParser\Nodes;
 
 use SimpleXMLElement;
-use App\ReaXml\Nodes\Uri;
+use AdGroup\ReaxmlParser\Nodes\Uri;
 
 class Miniweb
 {
