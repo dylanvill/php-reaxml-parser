@@ -13,10 +13,11 @@ class Area
 
     use HasText, HasNodeValidation;
 
-    public ?Range $range;
+    public ?Range $range = null;
 
-    /** Expected result: "square|squareMeter|acre|hectare" */
+    /** Expected value: "square|squareMeter|acre|hectare" */
     public ?string $unit = null;
+    /** Expected value: "total" */
     public ?string $of = null;
 
     public function __construct(SimpleXMLElement $node) {
