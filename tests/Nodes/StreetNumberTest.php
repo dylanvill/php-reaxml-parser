@@ -1,0 +1,23 @@
+<?php
+
+namespace AdGroup\ReaxmlParser\Tests\Nodes;
+
+use AdGroup\ReaxmlParser\Nodes\StreetNumber;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsTextNode;
+use Orchestra\Testbench\TestCase;
+
+class StreetNumberTest extends TestCase
+{
+    use TestsTextNode, TestsNodeValidation;
+
+    public function nodeName(): string
+    {
+        return 'streetNumber';
+    }
+
+    public function nodeClass(): string
+    {
+        return StreetNumber::class;
+    }
+}
