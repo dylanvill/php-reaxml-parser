@@ -84,7 +84,7 @@ class AddressTest extends TestCase
         $this->defaultTestAddress = new Address($this->generateXml("address", [], self::DEFAULT_CHILD_NODES));
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Address::class;
     }

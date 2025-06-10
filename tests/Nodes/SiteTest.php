@@ -16,7 +16,7 @@ class SiteTest extends TestCase
         return 'site';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Site::class;
     }

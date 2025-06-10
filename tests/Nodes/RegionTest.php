@@ -16,7 +16,7 @@ class RegionTest extends TestCase
         return 'region';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Region::class;
     }

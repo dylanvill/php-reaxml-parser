@@ -16,7 +16,7 @@ class PostcodeTest extends TestCase
         return 'postcode';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Postcode::class;
     }

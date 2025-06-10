@@ -16,7 +16,7 @@ class MinTest extends TestCase
         return 'min';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Min::class;
     }

@@ -16,7 +16,7 @@ class StreetTest extends TestCase
         return 'street';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Street::class;
     }

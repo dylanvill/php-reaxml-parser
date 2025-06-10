@@ -16,7 +16,7 @@ class StateTest extends TestCase
         return 'state';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return State::class;
     }

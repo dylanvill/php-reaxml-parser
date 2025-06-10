@@ -16,7 +16,7 @@ class AnnualRainfallTest extends TestCase
         return 'annualRainfall';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return AnnualRainfall::class;
     }

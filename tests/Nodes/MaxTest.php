@@ -16,7 +16,7 @@ class MaxTest extends TestCase
         return 'max';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Max::class;
     }

@@ -13,7 +13,7 @@ class RangeTest extends TestCase
 
     const TEST_VALUE = "yes";
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Range::class;
     }

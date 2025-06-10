@@ -17,7 +17,7 @@ class AreaTest extends TestCase
         return 'area';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Area::class;
     }

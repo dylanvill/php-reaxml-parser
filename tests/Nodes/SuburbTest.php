@@ -17,7 +17,7 @@ class SuburbTest extends TestCase
         return 'suburb';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Suburb::class;
     }

@@ -16,7 +16,7 @@ class AirConditioningTest extends TestCase
         return 'airConditioning';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return AirConditioning::class;
     }

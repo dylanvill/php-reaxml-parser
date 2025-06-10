@@ -16,7 +16,7 @@ class FurnishedTest extends TestCase
         return 'furnished';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Furnished::class;
     }

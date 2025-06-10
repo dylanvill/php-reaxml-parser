@@ -16,7 +16,7 @@ class CountryTest extends TestCase
         return 'country';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Country::class;
     }

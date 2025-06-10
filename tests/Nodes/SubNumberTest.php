@@ -16,7 +16,7 @@ class SubNumberTest extends TestCase
         return 'subNumber';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return SubNumber::class;
     }

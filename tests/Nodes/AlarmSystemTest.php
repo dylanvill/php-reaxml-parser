@@ -16,7 +16,7 @@ class AlarmSystemTest extends TestCase
         return 'alarmSystem';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return AlarmSystem::class;
     }

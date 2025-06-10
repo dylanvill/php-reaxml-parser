@@ -28,7 +28,7 @@ class AllowancesTest extends TestCase
         return simplexml_load_string($content);
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Allowances::class;
     }

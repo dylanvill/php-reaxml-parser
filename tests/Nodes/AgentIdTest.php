@@ -16,7 +16,7 @@ class AgentIdTest extends TestCase
         return 'agentID';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return AgentId::class;
     }

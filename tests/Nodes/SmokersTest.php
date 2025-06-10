@@ -16,7 +16,7 @@ class SmokersTest extends TestCase
         return 'smokers';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return Smokers::class;
     }

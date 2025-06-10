@@ -16,7 +16,7 @@ class LotNumberTest extends TestCase
         return 'lotNumber';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return LotNumber::class;
     }

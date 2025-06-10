@@ -16,7 +16,7 @@ class PetFriendlyTest extends TestCase
         return 'petFriendly';
     }
 
-    public function nodeClass(): string
+    protected function nodeClass(): string
     {
         return PetFriendly::class;
     }
