@@ -11,7 +11,7 @@ class Suburb
 {
     const NODE_NAME = "suburb";
 
-    public YesNoEnum $display;
+    public ?YesNoEnum $display = null;
 
     use HasText, HasNodeValidation;
 
@@ -22,6 +22,6 @@ class Suburb
 
         $attributes = $node->attributes();
 
-        $this->display = YesNoEnum::parse($attributes->display->__toString());
+        $this->display = empty($attributes->display) ? null : YesNoEnum::parse($attributes->display->__toString());
     }
 }
