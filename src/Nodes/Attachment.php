@@ -20,6 +20,7 @@ class Attachment
     public function __construct(SimpleXMLElement $node)
     {
         $this->validateNodeName(self::NODE_NAME, $node);
+        $this->assignNodeToText($node);
 
         $attributes = $node->attributes();
         $this->id = empty($attributes->id) ? null : $attributes->id->__toString();
