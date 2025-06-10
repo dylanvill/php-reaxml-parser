@@ -2,22 +2,22 @@
 
 namespace AdGroup\ReaxmlParser\Tests\Nodes;
 
-use AdGroup\ReaxmlParser\Nodes\Site;
-use Orchestra\Testbench\TestCase;
+use AdGroup\ReaxmlParser\Nodes\StreetNumber;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsTextNode;
+use Orchestra\Testbench\TestCase;
 
-class SiteTest extends TestCase
+class StreetNumberTest extends TestCase
 {
     use TestsTextNode, TestsNodeValidation;
 
     public function nodeName(): string
     {
-        return 'site';
+        return 'streetNumber';
     }
 
     public function nodeClass(): string
     {
-        return Site::class;
+        return StreetNumber::class;
     }
 }
