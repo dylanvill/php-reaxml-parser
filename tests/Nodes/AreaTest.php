@@ -12,7 +12,7 @@ class AreaTest extends TestCase
 {
     use TestsTextNode, TestsNodeValidation, GeneratesSampleXml;
 
-    public function nodeName(): string
+    protected function nodeName(): string
     {
         return 'area';
     }

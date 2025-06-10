@@ -11,7 +11,7 @@ class AlarmSystemTest extends TestCase
 {
     use TestsTextNode, TestsNodeValidation;
 
-    public function nodeName(): string
+    protected function nodeName(): string
     {
         return 'alarmSystem';
     }

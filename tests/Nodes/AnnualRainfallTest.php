@@ -11,7 +11,7 @@ class AnnualRainfallTest extends TestCase
 {
     use TestsTextNode, TestsNodeValidation;
 
-    public function nodeName(): string
+    protected function nodeName(): string
     {
         return 'annualRainfall';
     }
