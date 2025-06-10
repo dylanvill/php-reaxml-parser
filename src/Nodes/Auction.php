@@ -11,10 +11,13 @@ class Auction
 
     use HasNodeValidation;
 
-    public ?string $date;
+    public ?string $date = null;
 
     public function __construct(SimpleXMLElement $node)
     {
         $this->validateNodeName(self::NODE_NAME, $node);
+
+        $attributes = $node->attributes();
+        $this->date = empty($attributes->date) ? null : $attributes->date->__toString();
     }
 }
