@@ -24,7 +24,6 @@ class Address
 
     public ?YesNoEnum $display = null;
     public ?YesNoEnum $streetview = null;
-    public ?string $unit = null;
 
     public ?Site $site = null;
     public ?SubNumber $subNumber = null;
@@ -45,7 +44,6 @@ class Address
 
         $this->display = empty($attributes->display) ? null : YesNoEnum::parse($attributes->display->__toString());
         $this->streetview = empty($attributes->streetview) ? null : YesNoEnum::parse($attributes->streetview->__toString());
-        $this->unit = empty($attributes->unit) ? null : $attributes->unit->__toString();
     }
 
     private function mapNodes(SimpleXMLElement $node): void {
