@@ -13,7 +13,7 @@ class SiteTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'site';
+        return "site";
     }
 
     protected function nodeClass(): string

@@ -13,7 +13,7 @@ class MinTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'min';
+        return "min";
     }
 
     protected function nodeClass(): string

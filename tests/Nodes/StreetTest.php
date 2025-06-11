@@ -13,7 +13,7 @@ class StreetTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'street';
+        return "street";
     }
 
     protected function nodeClass(): string

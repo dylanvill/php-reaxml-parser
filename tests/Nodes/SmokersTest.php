@@ -13,7 +13,7 @@ class SmokersTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'smokers';
+        return "smokers";
     }
 
     protected function nodeClass(): string

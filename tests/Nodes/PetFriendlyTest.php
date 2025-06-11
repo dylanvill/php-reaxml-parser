@@ -13,7 +13,7 @@ class PetFriendlyTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'petFriendly';
+        return "petFriendly";
     }
 
     protected function nodeClass(): string

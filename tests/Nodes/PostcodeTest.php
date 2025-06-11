@@ -13,7 +13,7 @@ class PostcodeTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'postcode';
+        return "postcode";
     }
 
     protected function nodeClass(): string

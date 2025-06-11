@@ -13,7 +13,7 @@ class SubNumberTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'subNumber';
+        return "subNumber";
     }
 
     protected function nodeClass(): string

@@ -13,7 +13,7 @@ class CountryTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'country';
+        return "country";
     }
 
     protected function nodeClass(): string

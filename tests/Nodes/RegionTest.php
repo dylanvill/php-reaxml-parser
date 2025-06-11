@@ -13,7 +13,7 @@ class RegionTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'region';
+        return "region";
     }
 
     protected function nodeClass(): string

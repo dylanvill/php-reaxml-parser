@@ -13,7 +13,7 @@ class FurnishedTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'furnished';
+        return "furnished";
     }
 
     protected function nodeClass(): string

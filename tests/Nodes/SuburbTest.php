@@ -14,7 +14,7 @@ class SuburbTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'suburb';
+        return "suburb";
     }
 
     protected function nodeClass(): string

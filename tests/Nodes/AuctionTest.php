@@ -26,9 +26,9 @@ class AuctionTest extends TestCase
 
     public function test_date_has_the_correct_value(): void
     {
-        $xml = $this->generateXml(Auction::NODE_NAME, ['date' => 'date-value']);
+        $xml = $this->generateXml(Auction::NODE_NAME, ["date" => "date-value"]);
         $auction = new Auction($xml);
 
-        $this->assertEquals('date-value', $auction->date);
+        $this->assertEquals("date-value", $auction->date);
     }
 }

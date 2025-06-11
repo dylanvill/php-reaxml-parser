@@ -13,7 +13,7 @@ class MaxTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'max';
+        return "max";
     }
 
     protected function nodeClass(): string
