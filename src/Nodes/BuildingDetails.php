@@ -13,12 +13,13 @@ class BuildingDetails
 
     use HasNodeValidation;
 
-    public ?Area $area;
-    public ?EnergyRating $energyRating;
+    public ?Area $area = null;
+    public ?EnergyRating $energyRating = null;
 
     public function __construct(SimpleXMLElement $node)
     {
         $this->validateNodeName(self::NODE_NAME, $node);
+        $this->mapNodes($node);
     }
 
     private function mapNodes(SimpleXMLElement $node): void
