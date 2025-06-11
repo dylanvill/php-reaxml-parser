@@ -13,7 +13,7 @@ class AnnualRainfallTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'annualRainfall';
+        return AnnualRainfall::NODE_NAME;
     }
 
     protected function nodeClass(): string

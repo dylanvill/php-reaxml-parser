@@ -12,7 +12,7 @@ class AuctionResult
     use HasNodeValidation;
 
     /** Expected values: "sold-prior-to-auction|sold-at-auction|passed-in|passed-in-vendor-bid|withdrawn|sold-after-auction" */
-    public ?string $type;
+    public ?string $type = null;
 
     public function __construct(SimpleXMLElement $node)
     {

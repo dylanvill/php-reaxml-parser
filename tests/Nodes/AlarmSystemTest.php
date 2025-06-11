@@ -13,7 +13,7 @@ class AlarmSystemTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'alarmSystem';
+        return AlarmSystem::NODE_NAME;
     }
 
     protected function nodeClass(): string

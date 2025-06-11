@@ -14,7 +14,7 @@ class AreaTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'area';
+        return Area::NODE_NAME;
     }
 
     protected function nodeClass(): string
@@ -24,7 +24,7 @@ class AreaTest extends TestCase
 
     public function test_range_is_null_when_range_is_empty(): void
     {
-        $xml = $this->generateXml('area');
+        $xml = $this->generateXml("area");
         $area = new Area($xml);
 
         $this->assertNull($area->range);
@@ -32,7 +32,7 @@ class AreaTest extends TestCase
 
     public function test_unit_is_null_when_there_is_no_unit_attribute(): void
     {
-        $xml = $this->generateXml('area');
+        $xml = $this->generateXml("area");
         $area = new Area($xml);
 
         $this->assertNull($area->unit);
@@ -40,15 +40,15 @@ class AreaTest extends TestCase
 
     public function test_unit_is_not_null_when_there_is_a_unit_attribute(): void
     {
-        $xml = $this->generateXml('area', ['unit' => 'square']);
+        $xml = $this->generateXml("area", ["unit" => "square"]);
         $area = new Area($xml);
 
-        $this->assertEquals('square', $area->unit);
+        $this->assertEquals("square", $area->unit);
     }
 
     public function test_of_is_null_when_there_is_no_of_attribute(): void
     {
-        $xml = $this->generateXml('area');
+        $xml = $this->generateXml("area");
         $area = new Area($xml);
 
         $this->assertNull($area->of);
@@ -56,9 +56,9 @@ class AreaTest extends TestCase
 
     public function test_of_is_not_null_when_there_is_an_of_attribute(): void
     {
-        $xml = $this->generateXml('area', ['of' => 'total']);
+        $xml = $this->generateXml("area", ["of" => "total"]);
         $area = new Area($xml);
 
-        $this->assertEquals('total', $area->of);
+        $this->assertEquals("total", $area->of);
     }
 }

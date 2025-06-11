@@ -13,7 +13,7 @@ class AuctionDateTest extends TestCase
 
     protected function nodeName(): string
     {
-        return 'auctionDate';
+        return AuctionDate::NODE_NAME;
     }
 
     protected function nodeClass(): string

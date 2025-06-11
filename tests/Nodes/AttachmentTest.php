@@ -14,7 +14,7 @@ class AttachmentTest extends TestCase
 
     protected function nodeName(): string
     {
-        return "attachment";
+        return Attachment::NODE_NAME;
     }
 
     protected function nodeClass(): string
@@ -32,10 +32,10 @@ class AttachmentTest extends TestCase
 
     public function test_id_has_the_correct_value(): void
     {
-        $xml = $this->generateXml(Attachment::NODE_NAME, ['id' => 'id-value']);
+        $xml = $this->generateXml(Attachment::NODE_NAME, ["id" => "id-value"]);
         $attachment = new Attachment($xml);
 
-        $this->assertEquals('id-value', $attachment->id);
+        $this->assertEquals("id-value", $attachment->id);
     }
 
     public function test_usage_is_null_when_there_is_no_usage_attribute(): void
@@ -48,10 +48,10 @@ class AttachmentTest extends TestCase
 
     public function test_usage_has_the_correct_value(): void
     {
-        $xml = $this->generateXml(Attachment::NODE_NAME, ['usage' => 'statementOfInformation']);
+        $xml = $this->generateXml(Attachment::NODE_NAME, ["usage" => "statementOfInformation"]);
         $attachment = new Attachment($xml);
 
-        $this->assertEquals('statementOfInformation', $attachment->usage);
+        $this->assertEquals("statementOfInformation", $attachment->usage);
     }
 
     public function test_url_is_null_when_there_is_no_url_attribute(): void
@@ -64,9 +64,9 @@ class AttachmentTest extends TestCase
 
     public function test_url_has_the_correct_value(): void
     {
-        $xml = $this->generateXml(Attachment::NODE_NAME, ['url' => 'test-url']);
+        $xml = $this->generateXml(Attachment::NODE_NAME, ["url" => "test-url"]);
         $attachment = new Attachment($xml);
 
-        $this->assertEquals('test-url', $attachment->url);
+        $this->assertEquals("test-url", $attachment->url);
     }
 }

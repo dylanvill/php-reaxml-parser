@@ -26,9 +26,9 @@ class AuctionMaxBidTest extends TestCase
 
     protected function test_value_is_correct(): void
     {
-        $xml = $this->generateXml(AuctionMaxBid::NODE_NAME, ['value' => 'test-value']);
+        $xml = $this->generateXml(AuctionMaxBid::NODE_NAME, ["value" => "test-value"]);
         $auctionMaxBid = new AuctionMaxBid($xml);
 
-        $this->assertEquals('test-value', $auctionMaxBid->value);
+        $this->assertEquals("test-value", $auctionMaxBid->value);
     }
 }
