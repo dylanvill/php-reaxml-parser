@@ -11,7 +11,7 @@ class AuctionMaxBid
 
     use HasNodeValidation;
 
-    public ?string $value;
+    public ?string $value = null; 
 
     public function __construct(SimpleXMLElement $node)
     {
