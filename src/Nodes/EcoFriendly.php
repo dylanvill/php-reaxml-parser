@@ -15,10 +15,10 @@ class EcoFriendly
 
     use HasNodeValidation;
 
-    public ?SolarPanels $solarPanels;
-    public ?SolarHotWater $solarHotWater;
-    public ?WaterTank $waterTank;
-    public ?GreyWaterSystem $greyWaterSystem;
+    public ?SolarPanels $solarPanels = null;
+    public ?SolarHotWater $solarHotWater = null;
+    public ?WaterTank $waterTank = null;
+    public ?GreyWaterSystem $greyWaterSystem = null;
 
     public function __construct(SimpleXMLElement $node)
     {

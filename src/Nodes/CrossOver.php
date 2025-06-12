@@ -11,7 +11,7 @@ class CrossOver
 
     use HasNodeValidation;
 
-    public ?string $value;
+    public ?string $value = null;
 
     public function __construct(SimpleXMLElement $node) {
         $this->validateNodeName(self::NODE_NAME, $node);
