@@ -21,9 +21,6 @@ class Email
         $this->assignNodeToText($node);
 
         $attributes = $node->attributes();
-
-        if (!empty($attributes->receiveCampaignReport)) {
-            $this->receiveCampaignReport = YesNoEnum::parse($attributes->type->__toString());
-        }
+        $this->receiveCampaignReport = empty($attributes->receiveCampaignReport) ? null : YesNoEnum::parse($attributes->receiveCampaignReport->__toString());
     }
 }

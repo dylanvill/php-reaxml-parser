@@ -21,6 +21,10 @@ class ExtraFields
     public function __construct(SimpleXMLElement $node)
     {
         $this->validateNodeName(self::NODE_NAME, $node);
+        $this->mapNodes($node);
+
+        $attributes = $node->attributes();
+        $this->table = empty($attributes->table) ? null : $attributes->table->__toString();
     }
 
     private function mapNodes(SimpleXMLElement $node): void
