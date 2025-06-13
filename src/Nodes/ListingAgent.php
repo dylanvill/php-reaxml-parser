@@ -42,6 +42,10 @@ class ListingAgent
     {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->mapNodes($node);
+
+        $attributes = $node->attributes();
+        $this->id = empty($attributes->id) ? null : $attributes->id->__toString();
+        $this->displayAgentProfile = empty($attributes->displayAgentProfile) ? null : YesNoEnum::parse($attributes->displayAgentProfile->__toString());
     }
 
     private function mapNodes(SimpleXMLElement $node): void
@@ -63,7 +67,7 @@ class ListingAgent
             FacebookUrl::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->facebookUrl = new FacebookUrl($node[0]),
             LinkedInUrl::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->linkedInUrl = new LinkedInUrl($node[0]),
             UniqueListingAgentId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->uniqueListingAgentId = new UniqueListingAgentId($node[0]),
-            // Media::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->media = new Media($node[0]),
+            Media::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->media = new Media($node[0]),
         ];
 
         foreach ($mapping as $key => $callback) {
