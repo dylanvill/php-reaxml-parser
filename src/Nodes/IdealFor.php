@@ -49,5 +49,6 @@ class IdealFor
         foreach ($mapping as $key => $callback) {
             $callback($node->xpath($key));
         }
+
     }
 }

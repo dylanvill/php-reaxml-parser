@@ -13,7 +13,7 @@ class Spa
     use HasText, HasNodeValidation;
 
     /** Expected values: "inground|aboveground"" */
-    public string $type = "inground";
+    public ?string $type = null;
 
     public function __construct(SimpleXMLElement $node)
     {
@@ -21,6 +21,6 @@ class Spa
         $this->assignNodeToText($node);
 
         $attributes = $node->attributes();
-        $this->type = $attributes->type->__toString();
+        $this->type = empty($attributes->type) ? null : $attributes->type->__toString();
     }
 }

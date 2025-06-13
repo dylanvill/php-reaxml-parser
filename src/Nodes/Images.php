@@ -13,7 +13,7 @@ class Images
     use HasNodeValidation;
 
     /** @var Array<Img> */
-    public ?array $imgs = null;
+    public ?array $img = null;
 
     public function __construct(SimpleXMLElement $node)
     {
@@ -23,7 +23,7 @@ class Images
 
         foreach ($imgs as $element) {
             if (!empty($element)) {
-                $this->imgs[] = new Img($element);
+                $this->img[] = new Img($element);
             }
         }
     }
