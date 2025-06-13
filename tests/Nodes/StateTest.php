@@ -13,7 +13,7 @@ class StateTest extends TestCase
 
     protected function nodeName(): string
     {
-        return "state";
+        return State::NODE_NAME;
     }
 
     protected function nodeClass(): string

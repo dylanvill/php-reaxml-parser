@@ -2,22 +2,22 @@
 
 namespace AdGroup\ReaxmlParser\Tests\Nodes;
 
-use AdGroup\ReaxmlParser\Nodes\Region;
+use AdGroup\ReaxmlParser\Nodes\LivingAreas;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsTextNode;
 
-class RegionTest extends TestCase
+class LivingAreasTest extends TestCase
 {
     use TestsTextNode, TestsNodeValidation;
 
     protected function nodeName(): string
     {
-        return Region::NODE_NAME;
+        return LivingAreas::NODE_NAME;
     }
 
     protected function nodeClass(): string
     {
-        return Region::class;
+        return LivingAreas::class;
     }
 }

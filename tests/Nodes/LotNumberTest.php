@@ -13,7 +13,7 @@ class LotNumberTest extends TestCase
 
     protected function nodeName(): string
     {
-        return "lotNumber";
+        return LotNumber::NODE_NAME;
     }
 
     protected function nodeClass(): string
