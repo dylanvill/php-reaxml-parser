@@ -21,7 +21,8 @@ class LandDetails
     public ?array $depth = null;
     public ?CrossOver $crossOver = null;
 
-    public function __construct(SimpleXMLElement $node) {
+    public function __construct(SimpleXMLElement $node)
+    {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->mapNodes($node);
     }
@@ -32,12 +33,10 @@ class LandDetails
             Area::NODE_NAME => fn(?array $node) => empty($node) ? $this->area = null : $this->area = new Area($node[0]),
             Frontage::NODE_NAME => fn(?array $node) => empty($node) ? $this->frontage = null : $this->frontage = new Frontage($node[0]),
             Depth::NODE_NAME => function (?array $node) {
-                if (empty($node)) {
-                    $this->depth = null;
-                }
-
                 foreach ($node as $element) {
-                    $this->depth[] = new Depth($element);
+                    if (!empty($element)) {
+                        $this->depth[] = new Depth($element);
+                    }
                 }
             },
             CrossOver::NODE_NAME => fn(?array $node) => empty($node) ? $this->crossOver = null : $this->crossOver = new CrossOver($node[0]),
