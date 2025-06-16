@@ -21,5 +21,6 @@ class Pool
         $this->assignNodeToText($node);
 
         $attributes = $node->attributes();
+        $this->type = empty($attributes->type) ? null : $attributes->type->__toString();
     }
 }

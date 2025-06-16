@@ -2,6 +2,7 @@
 
 namespace AdGroup\ReaxmlParser\Nodes;
 
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use AdGroup\ReaxmlParser\Traits\HasText;
 use SimpleXMLElement;
 
@@ -9,7 +10,11 @@ class Services
 {
     const NODE_NAME = "services";
 
-    use HasText;
+    use HasText, HasNodeValidation;
 
-    public function __construct(SimpleXMLElement $node) {}
+    public function __construct(SimpleXMLElement $node)
+    {
+        $this->validateNodeName(self::NODE_NAME, $node);
+        $this->assignNodeToText($node);
+    }
 }

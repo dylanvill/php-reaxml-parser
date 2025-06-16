@@ -20,5 +20,8 @@ class SoldPrice
     {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->assignNodeToText($node);
+
+        $attributes = $node->attributes();
+        $this->display = empty($attributes->display) ? null : $attributes->display->__toString();
     }
 }

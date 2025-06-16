@@ -2,6 +2,7 @@
 
 namespace AdGroup\ReaxmlParser\Nodes;
 
+use AdGroup\ReaxmlParser\Enums\TaxEnum;
 use AdGroup\ReaxmlParser\Enums\YesNoEnum;
 use AdGroup\ReaxmlParser\Traits\HasText;
 use AdGroup\ReaxmlParser\Nodes\Range;
@@ -14,20 +15,29 @@ class Price
 
     use HasText, HasNodeValidation;
 
-    /** Expected values: "yes|no" */
-    public ?YesNoEnum $display = null;
+    public ?Range $range = null;
 
-    /** Expected values: "unknown|exempt|inclusive|exclusive" */
-    public ?string $tax = null;
+    public ?YesNoEnum $display = null;
+    public ?TaxEnum $tax = null;
 
     public function __construct(SimpleXMLElement $node)
     {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->assignNodeToText($node);
+        $this->parseRange($node);
 
         $attributes = $node->attributes();
 
         $this->display = empty($attributes->display) ? null : YesNoEnum::parse($attributes->display->__toString());
-        $this->tax = empty($attributes->tax) ? null : $attributes->tax->__toString();
+        $this->tax = empty($attributes->tax) ? null : TaxEnum::tryFrom($attributes->tax->__toString());
+    }
+
+    private function parseRange(SimpleXMLElement $node): void
+    {
+        $range = $node->xpath("range");
+
+        if (!empty($range)) {
+            $this->range = new Range($range[0]);
+        }
     }
 }

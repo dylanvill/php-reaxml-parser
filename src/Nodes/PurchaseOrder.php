@@ -2,6 +2,7 @@
 
 namespace AdGroup\ReaxmlParser\Nodes;
 
+use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
 use AdGroup\ReaxmlParser\Traits\HasText;
 use SimpleXMLElement;
 
@@ -9,7 +10,11 @@ class PurchaseOrder
 {
     const NODE_NAME = "purchaseOrder";
 
-    use HasText;
+    use HasText, HasNodeValidation;
 
-    public function __construct(SimpleXMLElement $xml) {}
+    public function __construct(SimpleXMLElement $node)
+    {
+        $this->validateNodeName(self::NODE_NAME, $node);
+        $this->assignNodeToText($node);
+    }
 }

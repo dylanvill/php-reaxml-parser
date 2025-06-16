@@ -2,13 +2,12 @@
 
 namespace AdGroup\ReaxmlParser\Tests\Nodes;
 
-use AdGroup\ReaxmlParser\Nodes\CommercialListingType;
 use AdGroup\ReaxmlParser\Nodes\RentPerSquareMetre;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
-class RangePerSquareMetreTest extends TestCase
+class RentPerSquareMetreTest extends TestCase
 {
     use TestsNodeValidation, GeneratesSampleXml;
 

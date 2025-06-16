@@ -19,6 +19,7 @@ class Project
     public function __construct(SimpleXMLElement $node)
     {
         $this->validateNodeName(self::NODE_NAME, $node);
+        $this->mapNodes($node);
     }
 
     private function mapNodes(SimpleXMLElement $node): void

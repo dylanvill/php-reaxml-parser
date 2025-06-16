@@ -7,7 +7,7 @@ use SimpleXMLElement;
 
 class Uri
 {
-    const NODE_NAME = "urn";
+    const NODE_NAME = "uri";
 
     use HasText;
 
