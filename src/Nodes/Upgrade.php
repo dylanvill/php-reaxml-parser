@@ -13,10 +13,11 @@ class Upgrade
 
     use HasNodeValidation;
 
-    public ?Upgrade $upgrade = null;
-
     public function __construct(SimpleXMLElement $node)
     {
         $this->validateNodeName(self::NODE_NAME, $node);
+
+        $presentation = $node->xpath(Presentation::NODE_NAME);
+        $this->presentation = empty($presentation) ? null : new Presentation($presentation[0]);
     }
 }

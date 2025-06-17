@@ -25,7 +25,7 @@ class StreetDirectory
         $this->mapNodes($node);
 
         $attributes = $node->attributes();
-        $this->type = $attributes->type->__toString();
+        $this->type = empty($attributes->type) ? null : $attributes->type->__toString();
     }
 
     private function mapNodes(SimpleXMLElement $node): void

@@ -13,7 +13,7 @@ class Telephone
     use HasText, HasNodeValidation;
 
     /** Expected values: "AH|mobile" */
-    public ?string $type = "mobile";
+    public ?string $type = null;
 
     public function __construct(SimpleXMLElement $node)
     {

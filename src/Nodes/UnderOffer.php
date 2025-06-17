@@ -12,18 +12,13 @@ class UnderOffer
 
     use HasNodeValidation;
 
-    public YesNoEnum $value = YesNoEnum::NO;
+    public ?YesNoEnum $value = null;
 
     public function __construct(SimpleXMLElement $node)
     {
         $this->validateNodeName(self::NODE_NAME, $node);
 
         $attributes = $node->attributes();
-
-        if (!empty($attributes->value)) {
-            $this->value = YesNoEnum::parse(
-                current((array) $attributes->value)
-            );
-        }
+        $this->value = empty($attributes->value) ? null : YesNoEnum::parse($attributes->value->__toString());
     }
 }
