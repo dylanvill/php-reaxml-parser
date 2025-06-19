@@ -40,7 +40,6 @@ use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Nodes\Project;
 use AdGroup\ReaxmlParser\Nodes\ExternalLink;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
-use AdGroup\ReaxmlParser\Tests\Traits\LoadsXmlStub;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
 
@@ -183,7 +182,11 @@ class ResidentialTest extends TestCase
             Objects::NODE_NAME => ["class" => Objects::class, "property" => "objects"],
             Media::NODE_NAME => ["class" => Media::class, "property" => "media"],
             Project::NODE_NAME => ["class" => Project::class, "property" => "project"],
+            ListingAgent::NODE_NAME => ["class" => ListingAgent::class, "property" => "listingAgent"],
+            VendorDetails::NODE_NAME => ["class" => VendorDetails::class, "property" => "vendorDetails"],
+            ExternalLink::NODE_NAME => ["class" => ExternalLink::class, "property" => "externalLink"],
         ];
+
 
         $xmlNodes = array_map(
             fn($name) => [
@@ -198,7 +201,8 @@ class ResidentialTest extends TestCase
         $residential = new Residential($xml);
 
         foreach ($map as $key => $value) {
-            $this->assertInstanceOf($value["class"], $residential->{$value["property"]});
+            $propertyValue = is_array($residential->{$value["property"]}) ? $residential->{$value["property"]}[0] : $residential->{$value["property"]};
+            $this->assertInstanceOf($value["class"], $propertyValue);
         }
     }
 }
