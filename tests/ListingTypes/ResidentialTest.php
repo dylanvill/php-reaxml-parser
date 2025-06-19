@@ -39,6 +39,7 @@ use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Nodes\Project;
 use AdGroup\ReaxmlParser\Nodes\ExternalLink;
+use AdGroup\ReaxmlParser\Tests\ListingTypes\Stubs\DummyCustomNode;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
@@ -187,6 +188,63 @@ class ResidentialTest extends TestCase
             ExternalLink::NODE_NAME => ["class" => ExternalLink::class, "property" => "externalLink"],
         ];
 
+        $xmlNodes = array_map(
+            fn($name) => [
+                "value" => "test-value",
+                "attributes" => [],
+                "name" => $name
+            ],
+            array_keys($map)
+        );
+
+        $xml = $this->generateXml(Residential::NODE_NAME, [], $xmlNodes);
+        $residential = (new Residential($xml))->map();
+
+        foreach ($map as $key => $value) {
+            $propertyValue = is_array($residential->{$value["property"]}) ? $residential->{$value["property"]}[0] : $residential->{$value["property"]};
+            $this->assertInstanceOf($value["class"], $propertyValue);
+        }
+    }
+
+    public function test_mapping_override_is_working_correctly(): void
+    {
+        $map = [
+            AgentId::NODE_NAME => ["class" => AgentId::class, "property" => "agentId"],
+            UniqueId::NODE_NAME => ["class" => UniqueId::class, "property" => "uniqueId"],
+            Authority::NODE_NAME => ["class" => Authority::class, "property" => "authority"],
+            UnderOffer::NODE_NAME => ["class" => UnderOffer::class, "property" => "underOffer"],
+            IsHomeLandPackage::NODE_NAME => ["class" => IsHomeLandPackage::class, "property" => "isHomeLandPackage"],
+            Price::NODE_NAME => ["class" => Price::class, "property" => "price"],
+            PriceView::NODE_NAME => ["class" => PriceView::class, "property" => "priceView"],
+            Address::NODE_NAME => ["class" => Address::class, "property" => "address"],
+            Municipality::NODE_NAME => ["class" => Municipality::class, "property" => "municipality"],
+            StreetDirectory::NODE_NAME => ["class" => StreetDirectory::class, "property" => "streetDirectory"],
+            Category::NODE_NAME => ["class" => Category::class, "property" => "category"],
+            Headline::NODE_NAME => ["class" => Headline::class, "property" => "headline"],
+            Description::NODE_NAME => ["class" => Description::class, "property" => "description"],
+            Features::NODE_NAME => ["class" => Features::class, "property" => "features"],
+            SoldDetails::NODE_NAME => ["class" => SoldDetails::class, "property" => "soldDetails"],
+            LandDetails::NODE_NAME => ["class" => LandDetails::class, "property" => "landDetails"],
+            BuildingDetails::NODE_NAME => ["class" => BuildingDetails::class, "property" => "buildingDetails"],
+            InspectionTimes::NODE_NAME => ["class" => InspectionTimes::class, "property" => "inspectionTimes"],
+            Auction::NODE_NAME => ["class" => Auction::class, "property" => "auction"],
+            AuctionOutcome::NODE_NAME => ["class" => AuctionOutcome::class, "property" => "auctionOutcome"],
+            YearBuilt::NODE_NAME => ["class" => YearBuilt::class, "property" => "yearBuilt"],
+            YearLastRenovated::NODE_NAME => ["class" => YearLastRenovated::class, "property" => "yearLastRenovated"],
+            VideoLink::NODE_NAME => ["class" => VideoLink::class, "property" => "videoLink"],
+            ExtraFields::NODE_NAME => ["class" => ExtraFields::class, "property" => "extraFields"],
+            Images::NODE_NAME => ["class" => Images::class, "property" => "images"],
+            NewConstruction::NODE_NAME => ["class" => NewConstruction::class, "property" => "newConstruction"],
+            EcoFriendly::NODE_NAME => ["class" => EcoFriendly::class, "property" => "ecoFriendly"],
+            IdealFor::NODE_NAME => ["class" => IdealFor::class, "property" => "idealFor"],
+            Views::NODE_NAME => ["class" => Views::class, "property" => "views"],
+            Objects::NODE_NAME => ["class" => Objects::class, "property" => "objects"],
+            Media::NODE_NAME => ["class" => Media::class, "property" => "media"],
+            Project::NODE_NAME => ["class" => Project::class, "property" => "project"],
+            ListingAgent::NODE_NAME => ["class" => ListingAgent::class, "property" => "listingAgent"],
+            VendorDetails::NODE_NAME => ["class" => VendorDetails::class, "property" => "vendorDetails"],
+            ExternalLink::NODE_NAME => ["class" => ExternalLink::class, "property" => "externalLink"],
+        ];
 
         $xmlNodes = array_map(
             fn($name) => [
@@ -199,10 +257,11 @@ class ResidentialTest extends TestCase
 
         $xml = $this->generateXml(Residential::NODE_NAME, [], $xmlNodes);
         $residential = new Residential($xml);
+        $residential->addMapping([
+            Price::NODE_NAME => fn(?array $node) => new DummyCustomNode($node[0])
+        ]);
+        $residential->map();
 
-        foreach ($map as $key => $value) {
-            $propertyValue = is_array($residential->{$value["property"]}) ? $residential->{$value["property"]}[0] : $residential->{$value["property"]};
-            $this->assertInstanceOf($value["class"], $propertyValue);
-        }
+        $this->assertInstanceOf(DummyCustomNode::class, $residential->price);
     }
 }

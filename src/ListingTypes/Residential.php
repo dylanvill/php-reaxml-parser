@@ -2,6 +2,7 @@
 
 namespace AdGroup\ReaxmlParser\ListingTypes;
 
+use AdGroup\ReaxmlParser\Contracts\ListingType;
 use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
 use AdGroup\ReaxmlParser\Nodes\AgentId;
 use AdGroup\ReaxmlParser\Nodes\UniqueId;
@@ -40,7 +41,7 @@ use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Nodes\Project;
 use SimpleXMLElement;
 
-class Residential
+class Residential implements ListingType
 {
     const NODE_NAME = "residential";
 
@@ -86,18 +87,20 @@ class Residential
     public ?Media $media = null;
     public ?Project $project = null;
 
-    public function __construct(SimpleXMLElement $node)
+    public array $mapping = [];
+
+    public function __construct(protected SimpleXMLElement $node)
     {
-        $this->mapNodes($node);
+        $this->mapInitialNotes($node);
 
         $attributes = $node->attributes();
         $this->modTime = empty($attributes->modTime) ? null : $attributes->modTime->__toString();
         $this->status = empty($attributes->status) ? null : ListingStatusEnum::tryFrom($attributes->status->__toString());
     }
 
-    private function mapNodes(SimpleXMLElement $node): void
+    private function mapInitialNotes(SimpleXMLElement $node): void
     {
-        $mapping = [
+        $this->mapping = [
             AgentId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->agentId = new AgentId($node[0]),
             UniqueId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->uniqueId = new UniqueId($node[0]),
             Authority::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->authority = new Authority($node[0]),
@@ -152,9 +155,23 @@ class Residential
             Media::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->media = new Media($node[0]),
             Project::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->project = new Project($node[0]),
         ];
+    }
 
-        foreach ($mapping as $key => $callback) {
-            $callback($node->xpath($key));
+    public function addMapping(array $array): self
+    {
+        $key = array_key_first($array);
+        $this->mapping[$key] = $array[$key];
+
+        var_dump($this->mapping);
+        return $this;
+    }
+
+    public function map(): self
+    {
+        foreach ($this->mapping as $key => $callback) {
+            $callback($this->node->xpath($key));
         }
+
+        return $this;
     }
 }
