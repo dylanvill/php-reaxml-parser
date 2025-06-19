@@ -2,7 +2,6 @@
 
 namespace AdGroup\ReaxmlParser\ListingTypes;
 
-use AdGroup\ReaxmlParser\Contracts\MapsNodes;
 use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
 use AdGroup\ReaxmlParser\Nodes\AgentId;
 use AdGroup\ReaxmlParser\Nodes\UniqueId;
@@ -43,6 +42,8 @@ use SimpleXMLElement;
 
 class Residential
 {
+    const NODE_NAME = "residential";
+
     public ?string $modTime = null;
     public ?ListingStatusEnum $status = null;
 
@@ -91,7 +92,7 @@ class Residential
 
         $attributes = $node->attributes();
         $this->modTime = empty($attributes->modTime) ? null : $attributes->modTime->__toString();
-        $this->status = empty($attributes->status) ? null : ListingStatusEnum::from($attributes->status->__toString());
+        $this->status = empty($attributes->status) ? null : ListingStatusEnum::tryFrom($attributes->status->__toString());
     }
 
     private function mapNodes(SimpleXMLElement $node): void
