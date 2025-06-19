@@ -18,7 +18,6 @@ class YearLastRenovated
         $this->validateNodeName(self::NODE_NAME, $node);
 
         $attributes = $node->attributes();
-
         $this->value = empty($attributes->value) ? null : $attributes->value->__toString();
     }
 }
