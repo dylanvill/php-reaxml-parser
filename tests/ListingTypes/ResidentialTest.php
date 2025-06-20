@@ -254,14 +254,19 @@ class ResidentialTest extends TestCase
             ],
             array_keys($map)
         );
+        $xmlNodes[] = [
+            "name" => DummyCustomNode::NODE_NAME,
+            "attributes" => [],
+            "value" => "dummy-custom-node-test"
+        ];
 
         $xml = $this->generateXml(Residential::NODE_NAME, [], $xmlNodes);
         $residential = new Residential($xml);
         $residential->addMapping([
-            Price::NODE_NAME => fn(?array $node) => new DummyCustomNode($node[0])
+            DummyCustomNode::NODE_NAME => fn(?array $node) => $residential->{DummyCustomNode::NODE_NAME} = new DummyCustomNode($node[0])
         ]);
         $residential->map();
 
-        $this->assertInstanceOf(DummyCustomNode::class, $residential->price);
+        $this->assertInstanceOf(DummyCustomNode::class, $residential->{DummyCustomNode::NODE_NAME});
     }
 }

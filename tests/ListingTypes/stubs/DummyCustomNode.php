@@ -6,5 +6,10 @@ use SimpleXMLElement;
 
 class DummyCustomNode
 {
-    public function __construct(SimpleXMLElement $node) {}
+
+    const NODE_NAME = "dummyCustomNode";
+
+    public function __construct(SimpleXMLElement $node) {
+        $test = "node";
+    }
 }

@@ -41,6 +41,7 @@ use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Nodes\Project;
 use SimpleXMLElement;
 
+#[\AllowDynamicProperties]
 class Residential implements ListingType
 {
     const NODE_NAME = "residential";
@@ -160,9 +161,9 @@ class Residential implements ListingType
     public function addMapping(array $array): self
     {
         $key = array_key_first($array);
-        $this->mapping[$key] = $array[$key];
+        $closure = $array[$key];
+        $this->mapping[$key] = $closure;
 
-        var_dump($this->mapping);
         return $this;
     }
 
