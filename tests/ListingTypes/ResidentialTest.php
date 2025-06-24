@@ -2,6 +2,7 @@
 
 namespace AdGroup\ReaxmlParser\Tests\ListingTypes;
 
+use AdGroup\ReaxmlParser\Contracts\ListingType;
 use AdGroup\ReaxmlParser\ListingTypes\Residential;
 use AdGroup\ReaxmlParser\Nodes\AgentId;
 use AdGroup\ReaxmlParser\Nodes\UniqueId;
@@ -27,6 +28,7 @@ use AdGroup\ReaxmlParser\Nodes\AuctionOutcome;
 use AdGroup\ReaxmlParser\Nodes\VendorDetails;
 use AdGroup\ReaxmlParser\Nodes\YearBuilt;
 use AdGroup\ReaxmlParser\Nodes\YearLastRenovated;
+use AdGroup\ReaxmlParser\Nodes\ExternalLink;
 use AdGroup\ReaxmlParser\Nodes\VideoLink;
 use AdGroup\ReaxmlParser\Nodes\ExtraFields;
 use AdGroup\ReaxmlParser\Nodes\Images;
@@ -37,7 +39,6 @@ use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Nodes\Project;
-use AdGroup\ReaxmlParser\Nodes\ExternalLink;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsListingType;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
@@ -53,9 +54,9 @@ class ResidentialTest extends TestCase
         return Residential::NODE_NAME;
     }
 
-    protected function nodeClass(): string
+    protected function nodeClass(): ListingType
     {
-        return Residential::class;
+        return new Residential();
     }
 
     protected function xmlProperties(): array
@@ -66,6 +67,7 @@ class ResidentialTest extends TestCase
             "authority",
             "underOffer",
             "isHomeLandPackage",
+            "listingAgent",
             "price",
             "priceView",
             "address",
@@ -81,8 +83,10 @@ class ResidentialTest extends TestCase
             "inspectionTimes",
             "auction",
             "auctionOutcome",
+            "vendorDetails",
             "yearBuilt",
             "yearLastRenovated",
+            "externalLink",
             "videoLink",
             "extraFields",
             "images",
@@ -93,9 +97,6 @@ class ResidentialTest extends TestCase
             "objects",
             "media",
             "project",
-            "listingAgent",
-            "vendorDetails",
-            "externalLink",
         ];
     }
 
@@ -107,6 +108,7 @@ class ResidentialTest extends TestCase
             Authority::NODE_NAME => ["class" => Authority::class, "property" => "authority"],
             UnderOffer::NODE_NAME => ["class" => UnderOffer::class, "property" => "underOffer"],
             IsHomeLandPackage::NODE_NAME => ["class" => IsHomeLandPackage::class, "property" => "isHomeLandPackage"],
+            ListingAgent::NODE_NAME => ["class" => ListingAgent::class, "property" => "listingAgent"],
             Price::NODE_NAME => ["class" => Price::class, "property" => "price"],
             PriceView::NODE_NAME => ["class" => PriceView::class, "property" => "priceView"],
             Address::NODE_NAME => ["class" => Address::class, "property" => "address"],
@@ -122,8 +124,10 @@ class ResidentialTest extends TestCase
             InspectionTimes::NODE_NAME => ["class" => InspectionTimes::class, "property" => "inspectionTimes"],
             Auction::NODE_NAME => ["class" => Auction::class, "property" => "auction"],
             AuctionOutcome::NODE_NAME => ["class" => AuctionOutcome::class, "property" => "auctionOutcome"],
+            VendorDetails::NODE_NAME => ["class" => VendorDetails::class, "property" => "vendorDetails"],
             YearBuilt::NODE_NAME => ["class" => YearBuilt::class, "property" => "yearBuilt"],
             YearLastRenovated::NODE_NAME => ["class" => YearLastRenovated::class, "property" => "yearLastRenovated"],
+            ExternalLink::NODE_NAME => ["class" => ExternalLink::class, "property" => "externalLink"],
             VideoLink::NODE_NAME => ["class" => VideoLink::class, "property" => "videoLink"],
             ExtraFields::NODE_NAME => ["class" => ExtraFields::class, "property" => "extraFields"],
             Images::NODE_NAME => ["class" => Images::class, "property" => "images"],
@@ -134,9 +138,6 @@ class ResidentialTest extends TestCase
             Objects::NODE_NAME => ["class" => Objects::class, "property" => "objects"],
             Media::NODE_NAME => ["class" => Media::class, "property" => "media"],
             Project::NODE_NAME => ["class" => Project::class, "property" => "project"],
-            ListingAgent::NODE_NAME => ["class" => ListingAgent::class, "property" => "listingAgent"],
-            VendorDetails::NODE_NAME => ["class" => VendorDetails::class, "property" => "vendorDetails"],
-            ExternalLink::NODE_NAME => ["class" => ExternalLink::class, "property" => "externalLink"],
         ];
     }
 }

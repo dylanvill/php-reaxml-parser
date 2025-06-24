@@ -2,6 +2,7 @@
 
 namespace AdGroup\ReaxmlParser\Tests\Traits;
 
+use AdGroup\ReaxmlParser\Contracts\ListingType;
 use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
 use AdGroup\ReaxmlParser\Tests\ListingTypes\Stubs\DummyCustomNode;
 
@@ -19,9 +20,9 @@ trait TestsListingType
     /**
      * Returns the class name of the listing class
      *
-     * @return string
+     * @return ListingType
      */
-    abstract protected function nodeClass(): string;
+    abstract protected function nodeClass(): ListingType;
 
     /**
      * Returns a single-dimension array that contains all the property
@@ -52,58 +53,64 @@ trait TestsListingType
     public function test_mod_time_is_null(): void
     {
         $xml = $this->generateXml($this->nodeName());
-        $class = $this->nodeClass();
-        $instance = new $class($xml);
 
-        $this->assertNull($instance->modTime);
+        $listingType = $this->nodeClass();
+        $listingType->map($xml);
+
+        $this->assertNull($listingType->modTime);
     }
 
     public function test_mod_time_has_the_correct_value(): void
     {
         $xml = $this->generateXml($this->nodeName(), ["modTime" => "mod-time-test"]);
-        $class = $this->nodeClass();
-        $instance = new $class($xml);
 
-        $this->assertEquals("mod-time-test", $instance->modTime);
+        $listingType = $this->nodeClass();
+        $listingType->map($xml);
+
+        $this->assertEquals("mod-time-test", $listingType->modTime);
     }
 
     public function test_status_is_null(): void
     {
         $xml = $this->generateXml($this->nodeName());
-        $class = $this->nodeClass();
-        $instance = new $class($xml);
 
-        $this->assertNull($instance->modTime);
+        $listingType = $this->nodeClass();
+        $listingType->map($xml);
+
+        $this->assertNull($listingType->modTime);
     }
 
     public function test_status_has_the_correct_value(): void
     {
         $xml = $this->generateXml($this->nodeName(), ["status" => "current"]);
-        $class = $this->nodeClass();
-        $instance = new $class($xml);
 
-        $this->assertEquals(ListingStatusEnum::CURRENT, $instance->status);
+        $listingType = $this->nodeClass();
+        $listingType->map($xml);
+
+        $this->assertEquals(ListingStatusEnum::CURRENT, $listingType->status);
     }
 
     public function test_status_is_null_when_it_is_not_part_of_the_expected_values(): void
     {
         $xml = $this->generateXml($this->nodeName(), ["status" => "random-value"]);
-        $class = $this->nodeClass();
-        $instance = new $class($xml);
 
-        $this->assertNull($instance->status);
+        $listingType = $this->nodeClass();
+        $listingType->map($xml);
+
+        $this->assertNull($listingType->status);
     }
 
     public function test_all_properties_are_initially_null(): void
     {
         $xml = $this->generateXml($this->nodeName());
-        $class = $this->nodeClass();
-        $instance = new $class($xml);
+
+        $listingType = $this->nodeClass();
+        $listingType->map($xml);
 
         $classProperties = $this->xmlProperties();
 
         foreach ($classProperties as $property) {
-            $this->assertNull($instance->{$property});
+            $this->assertNull($listingType->{$property});
         }
     }
 
@@ -122,11 +129,11 @@ trait TestsListingType
 
         $xml = $this->generateXml($this->nodeName(), [], $xmlNodes);
 
-        $class = $this->nodeClass();
-        $listingClass = (new $class($xml))->map();
+        $listingType = $this->nodeClass();
+        $listingType->map($xml);
 
         foreach ($map as $key => $value) {
-            $propertyValue = is_array($listingClass->{$value["property"]}) ? $listingClass->{$value["property"]}[0] : $listingClass->{$value["property"]};
+            $propertyValue = is_array($listingType->{$value["property"]}) ? $listingType->{$value["property"]}[0] : $listingType->{$value["property"]};
             $this->assertInstanceOf($value["class"], $propertyValue);
         }
     }
@@ -150,14 +157,13 @@ trait TestsListingType
         ];
 
         $xml = $this->generateXml($this->nodeName(), [], $xmlNodes);
-        $class = $this->nodeClass();
-        $listingClass = new $class($xml);
 
-        $listingClass->addMapping([
-            DummyCustomNode::NODE_NAME => fn(?array $node) => $listingClass->{DummyCustomNode::NODE_NAME} = new DummyCustomNode($node[0])
+        $listingType = $this->nodeClass();
+        $listingType->addMapping([
+            DummyCustomNode::NODE_NAME => fn(?array $node) => $listingType->{DummyCustomNode::NODE_NAME} = new DummyCustomNode($node[0])
         ]);
-        $listingClass->map();
+        $listingType->map($xml);
 
-        $this->assertInstanceOf(DummyCustomNode::class, $listingClass->{DummyCustomNode::NODE_NAME});
+        $this->assertInstanceOf(DummyCustomNode::class, $listingType->{DummyCustomNode::NODE_NAME});
     }
 }
