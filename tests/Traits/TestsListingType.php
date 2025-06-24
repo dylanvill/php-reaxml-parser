@@ -138,7 +138,7 @@ trait TestsListingType
         }
     }
 
-    public function test_mapping_override_is_working_correctly(): void
+    public function test_mapping_additional_properties_is_working_correctly(): void
     {
         $map = $this->xmlClassAndPropertyMapping();
 
