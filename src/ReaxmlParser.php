@@ -2,10 +2,20 @@
 
 namespace AdGroup\ReaxmlParser;
 
+use AdGroup\ReaxmlParser\Dtos\PropertyList;
+use SimpleXMLElement;
+
 class ReaxmlParser
 {
-    public static function test()
+    /**
+     * Reads a `SimpleXmlElement` object and parses it to an array that contains
+     * different instances of listing types
+     *
+     * @param SimpleXMLElement $xml
+     * @return PropertyList
+     */
+    public static function parse(SimpleXMLElement $xml): PropertyList
     {
-        var_dump("test");
+        return new PropertyList();
     }
 }
