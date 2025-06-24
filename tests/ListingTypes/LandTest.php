@@ -3,51 +3,54 @@
 namespace AdGroup\ReaxmlParser\Tests\ListingTypes;
 
 use AdGroup\ReaxmlParser\Contracts\ListingType;
-use AdGroup\ReaxmlParser\ListingTypes\Rental;
+use AdGroup\ReaxmlParser\ListingTypes\Land;
 use AdGroup\ReaxmlParser\Nodes\AgentId;
 use AdGroup\ReaxmlParser\Nodes\UniqueId;
+use AdGroup\ReaxmlParser\Nodes\Authority;
+use AdGroup\ReaxmlParser\Nodes\UnderOffer;
 use AdGroup\ReaxmlParser\Nodes\ListingAgent;
-use AdGroup\ReaxmlParser\Nodes\DateAvailable;
-use AdGroup\ReaxmlParser\Nodes\Rent;
+use AdGroup\ReaxmlParser\Nodes\Price;
 use AdGroup\ReaxmlParser\Nodes\PriceView;
-use AdGroup\ReaxmlParser\Nodes\Bond;
-use AdGroup\ReaxmlParser\Nodes\DepositTaken;
 use AdGroup\ReaxmlParser\Nodes\Address;
 use AdGroup\ReaxmlParser\Nodes\Municipality;
+use AdGroup\ReaxmlParser\Nodes\Estate;
 use AdGroup\ReaxmlParser\Nodes\StreetDirectory;
-use AdGroup\ReaxmlParser\Nodes\Category;
+use AdGroup\ReaxmlParser\Nodes\LandCategory;
 use AdGroup\ReaxmlParser\Nodes\Headline;
 use AdGroup\ReaxmlParser\Nodes\Description;
 use AdGroup\ReaxmlParser\Nodes\Features;
-use AdGroup\ReaxmlParser\Nodes\Holiday;
+use AdGroup\ReaxmlParser\Nodes\SoldDetails;
 use AdGroup\ReaxmlParser\Nodes\LandDetails;
-use AdGroup\ReaxmlParser\Nodes\NewConstruction;
-use AdGroup\ReaxmlParser\Nodes\BuildingDetails;
 use AdGroup\ReaxmlParser\Nodes\InspectionTimes;
+use AdGroup\ReaxmlParser\Nodes\Auction;
+use AdGroup\ReaxmlParser\Nodes\AuctionOutcome;
+use AdGroup\ReaxmlParser\Nodes\VendorDetails;
+use AdGroup\ReaxmlParser\Nodes\YearBuilt;
+use AdGroup\ReaxmlParser\Nodes\YearLastRenovated;
 use AdGroup\ReaxmlParser\Nodes\ExternalLink;
 use AdGroup\ReaxmlParser\Nodes\VideoLink;
 use AdGroup\ReaxmlParser\Nodes\ExtraFields;
 use AdGroup\ReaxmlParser\Nodes\Images;
-use AdGroup\ReaxmlParser\Nodes\Objects;
-use AdGroup\ReaxmlParser\Nodes\EcoFriendly;
 use AdGroup\ReaxmlParser\Nodes\Views;
-use AdGroup\ReaxmlParser\Nodes\Allowances;
+use AdGroup\ReaxmlParser\Nodes\Objects;
+use AdGroup\ReaxmlParser\Nodes\Media;
+use AdGroup\ReaxmlParser\Nodes\Project;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsListingType;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
 
-class RentalTest extends TestCase
+class LandTest extends TestCase
 {
     use TestsListingType;
 
     protected function nodeName(): string
     {
-        return Rental::NODE_NAME;
+        return Land::NODE_NAME;
     }
 
     protected function nodeClass(): ListingType
     {
-        return new Rental();
+        return new Land();
     }
 
     protected function xmlProperties(): array
@@ -55,32 +58,35 @@ class RentalTest extends TestCase
         return [
             "agentId",
             "uniqueId",
+            "authority",
+            "underOffer",
             "listingAgent",
-            "dateAvailable",
-            "rent",
+            "price",
             "priceView",
-            "bond",
-            "depositTaken",
             "address",
             "municipality",
+            "estate",
             "streetDirectory",
-            "category",
+            "landCategory",
             "headline",
             "description",
             "features",
-            "holiday",
+            "soldDetails",
             "landDetails",
-            "newConstruction",
-            "buildingDetails",
             "inspectionTimes",
+            "auction",
+            "auctionOutcome",
+            "vendorDetails",
+            "yearBuilt",
+            "yearLastRenovated",
             "externalLink",
             "videoLink",
             "extraFields",
             "images",
-            "objects",
-            "ecoFriendly",
             "views",
-            "allowances",
+            "objects",
+            "media",
+            "project",
         ];
     }
 
@@ -89,32 +95,35 @@ class RentalTest extends TestCase
         return [
             AgentId::NODE_NAME => ["class" => AgentId::class, "property" => "agentId"],
             UniqueId::NODE_NAME => ["class" => UniqueId::class, "property" => "uniqueId"],
+            Authority::NODE_NAME => ["class" => Authority::class, "property" => "authority"],
+            UnderOffer::NODE_NAME => ["class" => UnderOffer::class, "property" => "underOffer"],
             ListingAgent::NODE_NAME => ["class" => ListingAgent::class, "property" => "listingAgent"],
-            DateAvailable::NODE_NAME => ["class" => DateAvailable::class, "property" => "dateAvailable"],
-            Rent::NODE_NAME => ["class" => Rent::class, "property" => "rent"],
+            Price::NODE_NAME => ["class" => Price::class, "property" => "price"],
             PriceView::NODE_NAME => ["class" => PriceView::class, "property" => "priceView"],
-            Bond::NODE_NAME => ["class" => Bond::class, "property" => "bond"],
-            DepositTaken::NODE_NAME => ["class" => DepositTaken::class, "property" => "depositTaken"],
             Address::NODE_NAME => ["class" => Address::class, "property" => "address"],
             Municipality::NODE_NAME => ["class" => Municipality::class, "property" => "municipality"],
+            Estate::NODE_NAME => ["class" => Estate::class, "property" => "estate"],
             StreetDirectory::NODE_NAME => ["class" => StreetDirectory::class, "property" => "streetDirectory"],
-            Category::NODE_NAME => ["class" => Category::class, "property" => "category"],
+            LandCategory::NODE_NAME => ["class" => LandCategory::class, "property" => "landCategory"],
             Headline::NODE_NAME => ["class" => Headline::class, "property" => "headline"],
             Description::NODE_NAME => ["class" => Description::class, "property" => "description"],
             Features::NODE_NAME => ["class" => Features::class, "property" => "features"],
-            Holiday::NODE_NAME => ["class" => Holiday::class, "property" => "holiday"],
+            SoldDetails::NODE_NAME => ["class" => SoldDetails::class, "property" => "soldDetails"],
             LandDetails::NODE_NAME => ["class" => LandDetails::class, "property" => "landDetails"],
-            NewConstruction::NODE_NAME => ["class" => NewConstruction::class, "property" => "newConstruction"],
-            BuildingDetails::NODE_NAME => ["class" => BuildingDetails::class, "property" => "buildingDetails"],
             InspectionTimes::NODE_NAME => ["class" => InspectionTimes::class, "property" => "inspectionTimes"],
+            Auction::NODE_NAME => ["class" => Auction::class, "property" => "auction"],
+            AuctionOutcome::NODE_NAME => ["class" => AuctionOutcome::class, "property" => "auctionOutcome"],
+            VendorDetails::NODE_NAME => ["class" => VendorDetails::class, "property" => "vendorDetails"],
+            YearBuilt::NODE_NAME => ["class" => YearBuilt::class, "property" => "yearBuilt"],
+            YearLastRenovated::NODE_NAME => ["class" => YearLastRenovated::class, "property" => "yearLastRenovated"],
             ExternalLink::NODE_NAME => ["class" => ExternalLink::class, "property" => "externalLink"],
             VideoLink::NODE_NAME => ["class" => VideoLink::class, "property" => "videoLink"],
             ExtraFields::NODE_NAME => ["class" => ExtraFields::class, "property" => "extraFields"],
             Images::NODE_NAME => ["class" => Images::class, "property" => "images"],
-            Objects::NODE_NAME => ["class" => Objects::class, "property" => "objects"],
-            EcoFriendly::NODE_NAME => ["class" => EcoFriendly::class, "property" => "ecoFriendly"],
             Views::NODE_NAME => ["class" => Views::class, "property" => "views"],
-            Allowances::NODE_NAME => ["class" => Allowances::class, "property" => "allowances"],
+            Objects::NODE_NAME => ["class" => Objects::class, "property" => "objects"],
+            Media::NODE_NAME => ["class" => Media::class, "property" => "media"],
+            Project::NODE_NAME => ["class" => Project::class, "property" => "project"],
         ];
     }
 }
