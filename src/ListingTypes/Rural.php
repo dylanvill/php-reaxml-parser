@@ -2,7 +2,7 @@
 
 namespace AdGroup\ReaxmlParser\ListingTypes;
 
-use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
+use AdGroup\ReaxmlParser\Contracts\ListingType;
 use AdGroup\ReaxmlParser\Nodes\AgentId;
 use AdGroup\ReaxmlParser\Nodes\UniqueId;
 use AdGroup\ReaxmlParser\Nodes\Authority;
@@ -36,49 +36,102 @@ use AdGroup\ReaxmlParser\Nodes\IdealFor;
 use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Media;
-use SimpleXMLElement;
 
-class Rural
+#[\AllowDynamicProperties]
+class Rural extends ListingType
 {
-    public string $modTime;
-    public ListingStatusEnum $status;
+    const NODE_NAME = "rural";
 
-    public AgentId $agentId;
-    public UniqueId $uniqueId;
-    public ?Authority $authority;
-    public ?UnderOffer $underOffer;
-    /** @var Array<ListingAgent> */
-    public ?array $listingAgent;
-    public ?Price $price;
-    public ?PriceView $priceView;
-    public ?Address $address;
-    public ?Municipality $municipality;
-    public ?StreetDirectory $streetDirectory;
-    public ?RuralCategory $ruralCategory;
-    public ?Headline $headline;
-    public ?Description $description;
-    public ?Features $features;
-    public ?RuralFeatures $ruralFeatures;
-    public ?SoldDetails $soldDetails;
-    public ?LandDetails $landDetails;
-    public ?BuildingDetails $buildingDetails;
-    public ?InspectionTimes $inspectionTimes;
-    public ?Auction $auction;
-    public ?AuctionOutcome $auctionOutcome;
-    /** @var Array<VendorDetails> */
-    public ?VendorDetails $vendorDetails;
-    public ?YearBuilt $yearBuilt;
-    public ?YearLastRenovated $yearLastRenovated;
-    /** @var Array<ExternalLink> */
-    public ?ExternalLink $externalLink;
-    public ?VideoLink $videoLink;
-    public ?ExtraFields $extraFields;
-    public ?Images $images;
-    public ?EcoFriendly $ecoFriendly;
-    public ?IdealFor $idealFor;
-    public ?Views $views;
-    public ?Objects $objects;
-    public ?Media $media;
+    public ?AgentId $agentId = null;
+    public ?UniqueId $uniqueId = null;
+    public ?Authority $authority = null;
+    public ?UnderOffer $underOffer = null;
+    public ?array $listingAgent = null;
+    public ?Price $price = null;
+    public ?PriceView $priceView = null;
+    public ?Address $address = null;
+    public ?Municipality $municipality = null;
+    public ?StreetDirectory $streetDirectory = null;
+    public ?RuralCategory $ruralCategory = null;
+    public ?Headline $headline = null;
+    public ?Description $description = null;
+    public ?Features $features = null;
+    public ?RuralFeatures $ruralFeatures = null;
+    public ?SoldDetails $soldDetails = null;
+    public ?LandDetails $landDetails = null;
+    public ?BuildingDetails $buildingDetails = null;
+    public ?InspectionTimes $inspectionTimes = null;
+    public ?Auction $auction = null;
+    public ?AuctionOutcome $auctionOutcome = null;
+    public ?array $vendorDetails = null;
+    public ?YearBuilt $yearBuilt = null;
+    public ?YearLastRenovated $yearLastRenovated = null;
+    public ?array $externalLink = null;
+    public ?VideoLink $videoLink = null;
+    public ?ExtraFields $extraFields = null;
+    public ?Images $images = null;
+    public ?EcoFriendly $ecoFriendly = null;
+    public ?IdealFor $idealFor = null;
+    public ?Views $views = null;
+    public ?Objects $objects = null;
+    public ?Media $media = null;
 
-    public function __construct(SimpleXMLElement $node) {}
+    public function __construct() {}
+
+    protected function mapping(): array
+    {
+        return [
+            AgentId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->agentId = new AgentId($node[0]),
+            UniqueId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->uniqueId = new UniqueId($node[0]),
+            Authority::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->authority = new Authority($node[0]),
+            UnderOffer::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->underOffer = new UnderOffer($node[0]),
+            ListingAgent::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->listingAgent[] = new ListingAgent($element);
+                    }
+                }
+            },
+            Price::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->price = new Price($node[0]),
+            PriceView::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->priceView = new PriceView($node[0]),
+            Address::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->address = new Address($node[0]),
+            Municipality::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->municipality = new Municipality($node[0]),
+            StreetDirectory::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->streetDirectory = new StreetDirectory($node[0]),
+            RuralCategory::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->ruralCategory = new RuralCategory($node[0]),
+            Headline::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->headline = new Headline($node[0]),
+            Description::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->description = new Description($node[0]),
+            Features::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->features = new Features($node[0]),
+            RuralFeatures::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->ruralFeatures = new RuralFeatures($node[0]),
+            SoldDetails::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->soldDetails = new SoldDetails($node[0]),
+            LandDetails::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->landDetails = new LandDetails($node[0]),
+            BuildingDetails::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->buildingDetails = new BuildingDetails($node[0]),
+            InspectionTimes::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->inspectionTimes = new InspectionTimes($node[0]),
+            Auction::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->auction = new Auction($node[0]),
+            AuctionOutcome::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->auctionOutcome = new AuctionOutcome($node[0]),
+            VendorDetails::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->vendorDetails[] = new VendorDetails($element);
+                    }
+                }
+            },
+            YearBuilt::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->yearBuilt = new YearBuilt($node[0]),
+            YearLastRenovated::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->yearLastRenovated = new YearLastRenovated($node[0]),
+            ExternalLink::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->externalLink[] = new ExternalLink($element);
+                    }
+                }
+            },
+            VideoLink::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->videoLink = new VideoLink($node[0]),
+            ExtraFields::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->extraFields = new ExtraFields($node[0]),
+            Images::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->images = new Images($node[0]),
+            EcoFriendly::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->ecoFriendly = new EcoFriendly($node[0]),
+            IdealFor::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->idealFor = new IdealFor($node[0]),
+            Views::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->views = new Views($node[0]),
+            Objects::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->objects = new Objects($node[0]),
+            Media::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->media = new Media($node[0]),
+        ];
+    }
 }

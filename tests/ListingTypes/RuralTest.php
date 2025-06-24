@@ -3,22 +3,22 @@
 namespace AdGroup\ReaxmlParser\Tests\ListingTypes;
 
 use AdGroup\ReaxmlParser\Contracts\ListingType;
-use AdGroup\ReaxmlParser\ListingTypes\Residential;
+use AdGroup\ReaxmlParser\ListingTypes\Rural;
 use AdGroup\ReaxmlParser\Nodes\AgentId;
 use AdGroup\ReaxmlParser\Nodes\UniqueId;
 use AdGroup\ReaxmlParser\Nodes\Authority;
 use AdGroup\ReaxmlParser\Nodes\UnderOffer;
-use AdGroup\ReaxmlParser\Nodes\IsHomeLandPackage;
 use AdGroup\ReaxmlParser\Nodes\ListingAgent;
 use AdGroup\ReaxmlParser\Nodes\Price;
 use AdGroup\ReaxmlParser\Nodes\PriceView;
 use AdGroup\ReaxmlParser\Nodes\Address;
 use AdGroup\ReaxmlParser\Nodes\Municipality;
 use AdGroup\ReaxmlParser\Nodes\StreetDirectory;
-use AdGroup\ReaxmlParser\Nodes\Category;
+use AdGroup\ReaxmlParser\Nodes\RuralCategory;
 use AdGroup\ReaxmlParser\Nodes\Headline;
 use AdGroup\ReaxmlParser\Nodes\Description;
 use AdGroup\ReaxmlParser\Nodes\Features;
+use AdGroup\ReaxmlParser\Nodes\RuralFeatures;
 use AdGroup\ReaxmlParser\Nodes\SoldDetails;
 use AdGroup\ReaxmlParser\Nodes\LandDetails;
 use AdGroup\ReaxmlParser\Nodes\BuildingDetails;
@@ -32,29 +32,27 @@ use AdGroup\ReaxmlParser\Nodes\ExternalLink;
 use AdGroup\ReaxmlParser\Nodes\VideoLink;
 use AdGroup\ReaxmlParser\Nodes\ExtraFields;
 use AdGroup\ReaxmlParser\Nodes\Images;
-use AdGroup\ReaxmlParser\Nodes\NewConstruction;
 use AdGroup\ReaxmlParser\Nodes\EcoFriendly;
 use AdGroup\ReaxmlParser\Nodes\IdealFor;
 use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Media;
-use AdGroup\ReaxmlParser\Nodes\Project;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsListingType;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
 
-class ResidentialTest extends TestCase
+class RuralTest extends TestCase
 {
     use TestsListingType;
 
     protected function nodeName(): string
     {
-        return Residential::NODE_NAME;
+        return Rural::NODE_NAME;
     }
 
     protected function nodeClass(): ListingType
     {
-        return new Residential();
+        return new Rural();
     }
 
     protected function xmlProperties(): array
@@ -64,17 +62,17 @@ class ResidentialTest extends TestCase
             "uniqueId",
             "authority",
             "underOffer",
-            "isHomeLandPackage",
             "listingAgent",
             "price",
             "priceView",
             "address",
             "municipality",
             "streetDirectory",
-            "category",
+            "ruralCategory",
             "headline",
             "description",
             "features",
+            "ruralFeatures",
             "soldDetails",
             "landDetails",
             "buildingDetails",
@@ -88,13 +86,11 @@ class ResidentialTest extends TestCase
             "videoLink",
             "extraFields",
             "images",
-            "newConstruction",
             "ecoFriendly",
             "idealFor",
             "views",
             "objects",
             "media",
-            "project",
         ];
     }
 
@@ -105,17 +101,17 @@ class ResidentialTest extends TestCase
             UniqueId::NODE_NAME => ["class" => UniqueId::class, "property" => "uniqueId"],
             Authority::NODE_NAME => ["class" => Authority::class, "property" => "authority"],
             UnderOffer::NODE_NAME => ["class" => UnderOffer::class, "property" => "underOffer"],
-            IsHomeLandPackage::NODE_NAME => ["class" => IsHomeLandPackage::class, "property" => "isHomeLandPackage"],
             ListingAgent::NODE_NAME => ["class" => ListingAgent::class, "property" => "listingAgent"],
             Price::NODE_NAME => ["class" => Price::class, "property" => "price"],
             PriceView::NODE_NAME => ["class" => PriceView::class, "property" => "priceView"],
             Address::NODE_NAME => ["class" => Address::class, "property" => "address"],
             Municipality::NODE_NAME => ["class" => Municipality::class, "property" => "municipality"],
             StreetDirectory::NODE_NAME => ["class" => StreetDirectory::class, "property" => "streetDirectory"],
-            Category::NODE_NAME => ["class" => Category::class, "property" => "category"],
+            RuralCategory::NODE_NAME => ["class" => RuralCategory::class, "property" => "ruralCategory"],
             Headline::NODE_NAME => ["class" => Headline::class, "property" => "headline"],
             Description::NODE_NAME => ["class" => Description::class, "property" => "description"],
             Features::NODE_NAME => ["class" => Features::class, "property" => "features"],
+            RuralFeatures::NODE_NAME => ["class" => RuralFeatures::class, "property" => "ruralFeatures"],
             SoldDetails::NODE_NAME => ["class" => SoldDetails::class, "property" => "soldDetails"],
             LandDetails::NODE_NAME => ["class" => LandDetails::class, "property" => "landDetails"],
             BuildingDetails::NODE_NAME => ["class" => BuildingDetails::class, "property" => "buildingDetails"],
@@ -129,13 +125,11 @@ class ResidentialTest extends TestCase
             VideoLink::NODE_NAME => ["class" => VideoLink::class, "property" => "videoLink"],
             ExtraFields::NODE_NAME => ["class" => ExtraFields::class, "property" => "extraFields"],
             Images::NODE_NAME => ["class" => Images::class, "property" => "images"],
-            NewConstruction::NODE_NAME => ["class" => NewConstruction::class, "property" => "newConstruction"],
             EcoFriendly::NODE_NAME => ["class" => EcoFriendly::class, "property" => "ecoFriendly"],
             IdealFor::NODE_NAME => ["class" => IdealFor::class, "property" => "idealFor"],
             Views::NODE_NAME => ["class" => Views::class, "property" => "views"],
             Objects::NODE_NAME => ["class" => Objects::class, "property" => "objects"],
             Media::NODE_NAME => ["class" => Media::class, "property" => "media"],
-            Project::NODE_NAME => ["class" => Project::class, "property" => "project"],
         ];
     }
 }
