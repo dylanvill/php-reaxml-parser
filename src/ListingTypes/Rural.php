@@ -46,6 +46,7 @@ class Rural extends ListingType
     public ?UniqueId $uniqueId = null;
     public ?Authority $authority = null;
     public ?UnderOffer $underOffer = null;
+    /** @var Array<ListingAgent> */
     public ?array $listingAgent = null;
     public ?Price $price = null;
     public ?PriceView $priceView = null;
@@ -63,9 +64,11 @@ class Rural extends ListingType
     public ?InspectionTimes $inspectionTimes = null;
     public ?Auction $auction = null;
     public ?AuctionOutcome $auctionOutcome = null;
+    /** @var Array<VendorDetails> */
     public ?array $vendorDetails = null;
     public ?YearBuilt $yearBuilt = null;
     public ?YearLastRenovated $yearLastRenovated = null;
+    /** @var Array<ExternalLink> */
     public ?array $externalLink = null;
     public ?VideoLink $videoLink = null;
     public ?ExtraFields $extraFields = null;
