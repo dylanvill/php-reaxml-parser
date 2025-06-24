@@ -2,7 +2,7 @@
 
 namespace AdGroup\ReaxmlParser\ListingTypes;
 
-use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
+use AdGroup\ReaxmlParser\Contracts\ListingType;
 use AdGroup\ReaxmlParser\Nodes\AgentId;
 use AdGroup\ReaxmlParser\Nodes\UniqueId;
 use AdGroup\ReaxmlParser\Nodes\ListingAgent;
@@ -32,44 +32,94 @@ use AdGroup\ReaxmlParser\Nodes\EcoFriendly;
 use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Allowances;
 
-use SimpleXMLElement;
-
-class HolidayRental
+#[\AllowDynamicProperties]
+class Rental extends ListingType
 {
-    public string $modTime;
-    public ListingStatusEnum $status;
+    const NODE_NAME = "rental";
 
-    public AgentId $agentId;
-    public UniqueId $uniqueId;
+    public ?AgentId $agentId = null;
+    public ?UniqueId $uniqueId = null;
     /** @var Array<ListingAgent> */
-    public ?array $listingAgent;
-    public ?DateAvailable $dateAvailable;
+    public ?array $listingAgent = null;
+    public ?DateAvailable $dateAvailable = null;
     /** @var Array<Rent> */
-    public ?array $rent;
-    public ?PriceView $priceView;
-    public ?Bond $bond;
-    public ?DepositTaken $depositTaken;
-    public ?Address $address;
-    public ?Municipality $municipality;
-    public ?StreetDirectory $streetDirectory;
-    public ?Category $category;
-    public ?Headline $headline;
-    public ?Description $description;
-    public ?Features $features;
-    public ?Holiday $holiday;
-    public ?LandDetails $landDetails;
-    public ?NewConstruction $newConstruction;
-    public ?BuildingDetails $buildingDetails;
-    public ?InspectionTimes $inspectionTimes;
+    public ?array $rent = null;
+    public ?PriceView $priceView = null;
+    public ?Bond $bond = null;
+    public ?DepositTaken $depositTaken = null;
+    public ?Address $address = null;
+    public ?Municipality $municipality = null;
+    public ?StreetDirectory $streetDirectory = null;
+    public ?Category $category = null;
+    public ?Headline $headline = null;
+    public ?Description $description = null;
+    public ?Features $features = null;
+    public ?Holiday $holiday = null;
+    public ?LandDetails $landDetails = null;
+    public ?NewConstruction $newConstruction = null;
+    public ?BuildingDetails $buildingDetails = null;
+    public ?InspectionTimes $inspectionTimes = null;
     /** @var Array<ExternalLink> */
-    public ?array $externalLink;
-    public ?VideoLink $videoLink;
-    public ?ExtraFields $extraFields;
-    public ?Images $images;
-    public ?Objects $objects;
-    public ?EcoFriendly $ecoFriendly;
-    public ?Views $views;
-    public ?Allowances $allowances;
+    public ?array $externalLink = null;
+    public ?VideoLink $videoLink = null;
+    public ?ExtraFields $extraFields = null;
+    public ?Images $images = null;
+    public ?Objects $objects = null;
+    public ?EcoFriendly $ecoFriendly = null;
+    public ?Views $views = null;
+    public ?Allowances $allowances = null;
 
-    public function __construct(SimpleXMLElement $node) {}
+    public function __construct() {}
+
+    protected function mapping(): array
+    {
+        return [
+            AgentId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->agentId = new AgentId($node[0]),
+            UniqueId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->uniqueId = new UniqueId($node[0]),
+            ListingAgent::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->listingAgent[] = new ListingAgent($element);
+                    }
+                }
+            },
+            DateAvailable::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->dateAvailable = new DateAvailable($node[0]),
+            Rent::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->rent[] = new Rent($element);
+                    }
+                }
+            },
+            PriceView::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->priceView = new PriceView($node[0]),
+            Bond::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->bond = new Bond($node[0]),
+            DepositTaken::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->depositTaken = new DepositTaken($node[0]),
+            Address::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->address = new Address($node[0]),
+            Municipality::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->municipality = new Municipality($node[0]),
+            StreetDirectory::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->streetDirectory = new StreetDirectory($node[0]),
+            Category::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->category = new Category($node[0]),
+            Headline::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->headline = new Headline($node[0]),
+            Description::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->description = new Description($node[0]),
+            Features::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->features = new Features($node[0]),
+            Holiday::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->holiday = new Holiday($node[0]),
+            LandDetails::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->landDetails = new LandDetails($node[0]),
+            NewConstruction::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->newConstruction = new NewConstruction($node[0]),
+            BuildingDetails::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->buildingDetails = new BuildingDetails($node[0]),
+            InspectionTimes::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->inspectionTimes = new InspectionTimes($node[0]),
+            ExternalLink::NODE_NAME => function (?array $node = []) {
+                foreach ($node as $element) {
+                    if (!empty($element)) {
+                        $this->externalLink[] = new ExternalLink($element);
+                    }
+                }
+            },
+            VideoLink::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->videoLink = new VideoLink($node[0]),
+            ExtraFields::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->extraFields = new ExtraFields($node[0]),
+            Images::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->images = new Images($node[0]),
+            Objects::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->objects = new Objects($node[0]),
+            EcoFriendly::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->ecoFriendly = new EcoFriendly($node[0]),
+            Views::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->views = new Views($node[0]),
+            Allowances::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->allowances = new Allowances($node[0]),
+        ];
+    }
 }
