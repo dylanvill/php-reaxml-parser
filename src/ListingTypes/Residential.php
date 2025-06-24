@@ -3,7 +3,6 @@
 namespace AdGroup\ReaxmlParser\ListingTypes;
 
 use AdGroup\ReaxmlParser\Contracts\ListingType;
-use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
 use AdGroup\ReaxmlParser\Nodes\AgentId;
 use AdGroup\ReaxmlParser\Nodes\UniqueId;
 use AdGroup\ReaxmlParser\Nodes\Authority;
@@ -39,15 +38,11 @@ use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Nodes\Project;
-use SimpleXMLElement;
 
 #[\AllowDynamicProperties]
-class Residential implements ListingType
+class Residential extends ListingType
 {
     const NODE_NAME = "residential";
-
-    public ?string $modTime = null;
-    public ?ListingStatusEnum $status = null;
 
     public ?AgentId $agentId = null;
     public ?UniqueId $uniqueId = null;
@@ -88,20 +83,9 @@ class Residential implements ListingType
     public ?Media $media = null;
     public ?Project $project = null;
 
-    public array $mapping = [];
-
-    public function __construct(protected SimpleXMLElement $node)
+    protected function mapping(): array
     {
-        $this->mapInitialNotes($node);
-
-        $attributes = $node->attributes();
-        $this->modTime = empty($attributes->modTime) ? null : $attributes->modTime->__toString();
-        $this->status = empty($attributes->status) ? null : ListingStatusEnum::tryFrom($attributes->status->__toString());
-    }
-
-    private function mapInitialNotes(SimpleXMLElement $node): void
-    {
-        $this->mapping = [
+        return [
             AgentId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->agentId = new AgentId($node[0]),
             UniqueId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->uniqueId = new UniqueId($node[0]),
             Authority::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->authority = new Authority($node[0]),
@@ -156,23 +140,5 @@ class Residential implements ListingType
             Media::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->media = new Media($node[0]),
             Project::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->project = new Project($node[0]),
         ];
-    }
-
-    public function addMapping(array $array): self
-    {
-        $key = array_key_first($array);
-        $closure = $array[$key];
-        $this->mapping[$key] = $closure;
-
-        return $this;
-    }
-
-    public function map(): self
-    {
-        foreach ($this->mapping as $key => $callback) {
-            $callback($this->node->xpath($key));
-        }
-
-        return $this;
     }
 }
