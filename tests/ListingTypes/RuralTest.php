@@ -50,9 +50,9 @@ class RuralTest extends TestCase
         return Rural::NODE_NAME;
     }
 
-    protected function nodeClass(): ListingType
+    protected function nodeClass(): string
     {
-        return new Rural();
+        return Rural::class;
     }
 
     protected function xmlProperties(): array

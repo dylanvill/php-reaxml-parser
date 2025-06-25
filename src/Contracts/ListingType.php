@@ -3,15 +3,23 @@
 namespace AdGroup\ReaxmlParser\Contracts;
 
 use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 abstract class ListingType
 {
+    use ParsesExtraElements;
 
-    protected array $additionalMappings = [];
-
+    /** Listing attributes */
     public ?string $modTime = null;
     public ?ListingStatusEnum $status = null;
+
+    public function __construct(SimpleXMLElement $node)
+    {
+        $this->parseAttributes($node);
+        $this->parseElements($node);
+        $this->parseExtraElements($node);
+    }
 
     /**
      * Returns an array of key-value pair where the key is the name of the XML node and the
@@ -29,40 +37,9 @@ abstract class ListingType
      */
     abstract protected function mapping(): array;
 
-    /**
-     * Registers an additional XML child node mapping for the class. 
-     *
-     * @param Array<string,Closure> $array Accepts an array that follows the
-     * same format as the `mapping()` function.
-     * @see AdGroup\ReaxmlParser\Contracts\ListingType::mapping()
-     * @return self
-     */
-    public function addMapping(array $array): self
+    private function parseElements(SimpleXMLElement $node): void
     {
-        $key = array_key_first($array);
-        $closure = $array[$key];
-        $this->additionalMappings[$key] = $closure;
-
-        return $this;
-    }
-
-    /**
-     * Applies the mapping for the Listing class' child elements.
-     *
-     * @return self
-     */
-    public function map(SimpleXMLElement $node): self
-    {
-        $this->parseAttributes($node);
-        $this->processMapping($node);
-
-        return $this;
-    }
-
-    private function processMapping(SimpleXMLElement $node): void
-    {
-        $defaultMapping = $this->mapping();
-        $mapping = array_merge($defaultMapping, $this->additionalMappings);
+        $mapping = $this->mapping();
 
         foreach ($mapping as $key => $callback) {
             $callback($node->xpath($key));

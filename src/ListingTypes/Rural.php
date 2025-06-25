@@ -37,7 +37,6 @@ use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Media;
 
-#[\AllowDynamicProperties]
 class Rural extends ListingType
 {
     const NODE_NAME = "rural";
@@ -78,8 +77,6 @@ class Rural extends ListingType
     public ?Views $views = null;
     public ?Objects $objects = null;
     public ?Media $media = null;
-
-    public function __construct() {}
 
     protected function mapping(): array
     {
@@ -136,5 +133,10 @@ class Rural extends ListingType
             Objects::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->objects = new Objects($node[0]),
             Media::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->media = new Media($node[0]),
         ];
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return array_keys($this->mapping());
     }
 }

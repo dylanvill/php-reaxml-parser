@@ -48,9 +48,9 @@ class LandTest extends TestCase
         return Land::NODE_NAME;
     }
 
-    protected function nodeClass(): ListingType
+    protected function nodeClass(): string
     {
-        return new Land();
+        return Land::class;
     }
 
     protected function xmlProperties(): array

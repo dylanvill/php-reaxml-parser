@@ -167,6 +167,6 @@ trait TestsListingType
             $this->generateXml($this->nodeName(), [], $xmlNodes)
         );
 
-        $this->assertArrayHasKey("extraElements", $instance->extraElements);
+        $this->assertArrayHasKey("extraElement", $instance->extraElements);
     }
 }

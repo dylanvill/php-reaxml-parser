@@ -45,9 +45,9 @@ class RentalTest extends TestCase
         return Rental::NODE_NAME;
     }
 
-    protected function nodeClass(): ListingType
+    protected function nodeClass(): string
     {
-        return new Rental();
+        return Rental::class;
     }
 
     protected function xmlProperties(): array

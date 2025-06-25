@@ -39,9 +39,9 @@ class HolidayRentalTest extends TestCase
         return HolidayRental::NODE_NAME;
     }
 
-    protected function nodeClass(): ListingType
+    protected function nodeClass(): string
     {
-        return new HolidayRental();
+        return HolidayRental::class;
     }
 
     protected function xmlProperties(): array

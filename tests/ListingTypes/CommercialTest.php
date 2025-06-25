@@ -60,9 +60,9 @@ class CommercialTest extends TestCase
         return Commercial::NODE_NAME;
     }
 
-    protected function nodeClass(): ListingType
+    protected function nodeClass(): string
     {
-        return new Commercial();
+        return Commercial::class;
     }
 
     protected function xmlProperties(): array

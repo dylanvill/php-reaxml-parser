@@ -52,9 +52,9 @@ class ResidentialTest extends TestCase
         return Residential::NODE_NAME;
     }
 
-    protected function nodeClass(): ListingType
+    protected function nodeClass(): string
     {
-        return new Residential();
+        return Residential::class;
     }
 
     protected function xmlProperties(): array

@@ -27,7 +27,6 @@ use AdGroup\ReaxmlParser\Nodes\Images;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 
 
-#[\AllowDynamicProperties]
 class HolidayRental extends ListingType
 {
     const NODE_NAME = "holidayRental";
@@ -54,8 +53,6 @@ class HolidayRental extends ListingType
     public ?ExtraFields $extraFields = null;
     public ?Images $images = null;
     public ?Objects $objects = null;
-
-    public function __construct() {}
 
     protected function mapping(): array
     {
@@ -101,5 +98,10 @@ class HolidayRental extends ListingType
             Images::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->images = new Images($node[0]),
             Objects::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->objects = new Objects($node[0]),
         ];
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return array_keys($this->mapping());
     }
 }

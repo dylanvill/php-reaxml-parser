@@ -47,7 +47,6 @@ use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Miniweb;
 use AdGroup\ReaxmlParser\Nodes\PurchaseOrder;
 
-#[\AllowDynamicProperties]
 class Commercial extends ListingType
 {
     const NODE_NAME = "commercial";
@@ -95,8 +94,6 @@ class Commercial extends ListingType
     public ?Objects $objects = null;
     public ?Miniweb $miniweb = null;
     public ?PurchaseOrder $purchaseOrder = null;
-
-    public function __construct() {}
 
     protected function mapping(): array
     {
@@ -175,5 +172,10 @@ class Commercial extends ListingType
             Miniweb::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->miniweb = new Miniweb($node[0]),
             PurchaseOrder::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->purchaseOrder = new PurchaseOrder($node[0]),
         ];
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return array_keys($this->mapping());
     }
 }

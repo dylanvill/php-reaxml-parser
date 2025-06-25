@@ -141,4 +141,9 @@ class Residential extends ListingType
             Project::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->project = new Project($node[0]),
         ];
     }
+
+    protected function expectedXmlElements(): array
+    {
+        return array_keys($this->mapping());
+    }
 }

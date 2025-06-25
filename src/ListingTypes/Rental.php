@@ -32,7 +32,6 @@ use AdGroup\ReaxmlParser\Nodes\EcoFriendly;
 use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Allowances;
 
-#[\AllowDynamicProperties]
 class Rental extends ListingType
 {
     const NODE_NAME = "rental";
@@ -68,8 +67,6 @@ class Rental extends ListingType
     public ?EcoFriendly $ecoFriendly = null;
     public ?Views $views = null;
     public ?Allowances $allowances = null;
-
-    public function __construct() {}
 
     protected function mapping(): array
     {
@@ -121,5 +118,10 @@ class Rental extends ListingType
             Views::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->views = new Views($node[0]),
             Allowances::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->allowances = new Allowances($node[0]),
         ];
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return array_keys($this->mapping());
     }
 }
