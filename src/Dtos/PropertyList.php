@@ -2,14 +2,16 @@
 
 namespace AdGroup\ReaxmlParser\Dtos;
 
-class PropertyList
+readonly class PropertyList
 {
-    public array $commercial = [];
-    public array $holidayRental = [];
-    public array $land = [];
-    public array $rental = [];
-    public array $residential = [];
-    public array $rural = [];
+    public function __construct(
+        public array $commercial = [],
+        public array $holidayRental = [],
+        public array $land = [],
+        public array $rental = [],
+        public array $residential = [],
+        public array $rural = [],
+    ) {}
 
     public function noListings(): bool
     {
