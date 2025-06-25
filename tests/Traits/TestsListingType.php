@@ -5,6 +5,7 @@ namespace AdGroup\ReaxmlParser\Tests\Traits;
 use AdGroup\ReaxmlParser\Contracts\ListingType;
 use AdGroup\ReaxmlParser\Enums\ListingStatusEnum;
 use AdGroup\ReaxmlParser\Tests\ListingTypes\Stubs\DummyCustomNode;
+use SimpleXMLElement;
 
 trait TestsListingType
 {
@@ -22,7 +23,7 @@ trait TestsListingType
      *
      * @return ListingType
      */
-    abstract protected function nodeClass(): ListingType;
+    abstract protected function nodeClass(): string;
 
     /**
      * Returns a single-dimension array that contains all the property
@@ -50,120 +51,122 @@ trait TestsListingType
      */
     abstract protected function xmlClassAndPropertyMapping(): array;
 
+    private function createListingTypeInstance(SimpleXMLElement $xml): ListingType
+    {
+        $class = $this->nodeClass();
+        return new $class($xml);
+    }
+
+    private function generateXmlChildren(): array
+    {
+        $map = $this->xmlClassAndPropertyMapping();
+
+        return array_map(
+            fn($name) => [
+                "value" => "test-value",
+                "attributes" => [],
+                "name" => $name
+            ],
+            array_keys($map)
+        );
+    }
+
     public function test_mod_time_is_null(): void
     {
-        $xml = $this->generateXml($this->nodeName());
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName())
+        );
 
-        $listingType = $this->nodeClass();
-        $listingType->map($xml);
-
-        $this->assertNull($listingType->modTime);
+        $this->assertNull($instance->modTime);
     }
 
     public function test_mod_time_has_the_correct_value(): void
     {
-        $xml = $this->generateXml($this->nodeName(), ["modTime" => "mod-time-test"]);
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName(), ["modTime" => "mod-time-test"])
+        );
 
-        $listingType = $this->nodeClass();
-        $listingType->map($xml);
-
-        $this->assertEquals("mod-time-test", $listingType->modTime);
+        $this->assertEquals("mod-time-test", $instance->modTime);
     }
 
     public function test_status_is_null(): void
     {
-        $xml = $this->generateXml($this->nodeName());
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName())
+        );
 
-        $listingType = $this->nodeClass();
-        $listingType->map($xml);
-
-        $this->assertNull($listingType->modTime);
+        $this->assertNull($instance->modTime);
     }
 
     public function test_status_has_the_correct_value(): void
     {
-        $xml = $this->generateXml($this->nodeName(), ["status" => "current"]);
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName(), ["status" => "current"])
+        );
 
-        $listingType = $this->nodeClass();
-        $listingType->map($xml);
-
-        $this->assertEquals(ListingStatusEnum::CURRENT, $listingType->status);
+        $this->assertEquals(ListingStatusEnum::CURRENT, $instance->status);
     }
 
     public function test_status_is_null_when_it_is_not_part_of_the_expected_values(): void
     {
-        $xml = $this->generateXml($this->nodeName(), ["status" => "random-value"]);
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName(), ["status" => "random-value"])
+        );
 
-        $listingType = $this->nodeClass();
-        $listingType->map($xml);
-
-        $this->assertNull($listingType->status);
+        $this->assertNull($instance->status);
     }
 
-    public function test_all_properties_are_initially_null(): void
+    public function test_all_properties_are_null_when_there_is_no_appropriate_xml_element_to_map(): void
     {
-        $xml = $this->generateXml($this->nodeName());
-
-        $listingType = $this->nodeClass();
-        $listingType->map($xml);
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName())
+        );
 
         $classProperties = $this->xmlProperties();
 
         foreach ($classProperties as $property) {
-            $this->assertNull($listingType->{$property});
+            $this->assertNull($instance->{$property});
         }
     }
 
     public function test_all_xml_properties_are_instantiated_correctly(): void
     {
         $map = $this->xmlClassAndPropertyMapping();
-
-        $xmlNodes = array_map(
-            fn($name) => [
-                "value" => "test-value",
-                "attributes" => [],
-                "name" => $name
-            ],
-            array_keys($map)
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName(), [], $this->generateXmlChildren())
         );
 
-        $xml = $this->generateXml($this->nodeName(), [], $xmlNodes);
-
-        $listingType = $this->nodeClass();
-        $listingType->map($xml);
-
         foreach ($map as $key => $value) {
-            $propertyValue = is_array($listingType->{$value["property"]}) ? $listingType->{$value["property"]}[0] : $listingType->{$value["property"]};
+            $propertyValue = is_array($instance->{$value["property"]}) ? $instance->{$value["property"]}[0] : $instance->{$value["property"]};
             $this->assertInstanceOf($value["class"], $propertyValue);
         }
     }
 
-    public function test_mapping_additional_properties_is_working_correctly(): void
+    public function test_listing_class_contains_an_extra_element_property(): void
     {
-        $map = $this->xmlClassAndPropertyMapping();
-
-        $xmlNodes = array_map(
-            fn($name) => [
-                "value" => "test-value",
-                "attributes" => [],
-                "name" => $name
-            ],
-            array_keys($map)
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName(), [], $this->generateXmlChildren())
         );
-        $xmlNodes[] = [
-            "name" => DummyCustomNode::NODE_NAME,
+
+        $this->assertObjectHasProperty("extraElements", $instance);
+        $this->assertIsArray($instance->extraElements);
+    }
+
+    public function test_listing_class_parses_the_extra_elements_properly(): void
+    {
+        $mappedXmlChildren = $this->generateXmlChildren();
+        $extraElement = [
+            "value" => "extra-element-value",
             "attributes" => [],
-            "value" => "dummy-custom-node-test"
+            "name" => "extraElement"
         ];
 
-        $xml = $this->generateXml($this->nodeName(), [], $xmlNodes);
+        $xmlNodes = array_merge($mappedXmlChildren, [$extraElement]);
+        
+        $instance = $this->createListingTypeInstance(
+            $this->generateXml($this->nodeName(), [], $xmlNodes)
+        );
 
-        $listingType = $this->nodeClass();
-        $listingType->addMapping([
-            DummyCustomNode::NODE_NAME => fn(?array $node) => $listingType->{DummyCustomNode::NODE_NAME} = new DummyCustomNode($node[0])
-        ]);
-        $listingType->map($xml);
-
-        $this->assertInstanceOf(DummyCustomNode::class, $listingType->{DummyCustomNode::NODE_NAME});
+        $this->assertArrayHasKey("extraElements", $instance->extraElements);
     }
 }
