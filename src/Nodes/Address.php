@@ -14,13 +14,14 @@ use AdGroup\ReaxmlParser\Nodes\Postcode;
 use AdGroup\ReaxmlParser\Nodes\Region;
 use AdGroup\ReaxmlParser\Nodes\Country;
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 class Address
 {
     const NODE_NAME = "address";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     public ?YesNoEnum $display = null;
     public ?YesNoEnum $streetview = null;
@@ -39,6 +40,7 @@ class Address
     public function __construct(SimpleXMLElement $node) {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->mapNodes($node);
+        $this->parseExtraElements($node);
 
         $attributes = $node->attributes();
 
@@ -46,8 +48,13 @@ class Address
         $this->streetview = empty($attributes->streetview) ? null : YesNoEnum::parse($attributes->streetview->__toString());
     }
 
-    private function mapNodes(SimpleXMLElement $node): void {
-        $mapping = [
+    protected function expectedXmlElements(): array
+    {
+        return array_keys($this->mapping());
+    }
+
+    private function mapping(): array {
+        return [
             Site::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->site = new Site($node[0]),
             SubNumber::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->subNumber = new SubNumber($node[0]),
             LotNumber::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->lotNumber = new LotNumber($node[0]),
@@ -59,6 +66,10 @@ class Address
             Region::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->region = new Region($node[0]),
             Country::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->country = new Country($node[0]),
         ];
+    }
+
+    private function mapNodes(SimpleXMLElement $node): void {
+        $mapping = $this->mapping();
 
         foreach ($mapping as $key => $callback) {
             $callback($node->xpath($key));

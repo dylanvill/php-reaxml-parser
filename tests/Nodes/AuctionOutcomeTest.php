@@ -7,16 +7,22 @@ use AdGroup\ReaxmlParser\Nodes\AuctionMaxBid;
 use AdGroup\ReaxmlParser\Nodes\AuctionOutcome;
 use AdGroup\ReaxmlParser\Nodes\AuctionResult;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class AuctionOutcomeTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     protected function nodeClass(): string
     {
-        return AuctionMaxBid::class;
+        return AuctionOutcome::class;
+    }
+
+    protected function nodeName(): string
+    {
+        return AuctionOutcome::NODE_NAME;
     }
 
     public function test_all_properties_are_null_when_there_is_no_child_nodes()

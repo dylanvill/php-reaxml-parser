@@ -7,17 +7,23 @@ use AdGroup\ReaxmlParser\Nodes\Furnished;
 use AdGroup\ReaxmlParser\Nodes\PetFriendly;
 use AdGroup\ReaxmlParser\Nodes\Smokers;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 use SimpleXMLElement;
 
 class AllowancesTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     protected function nodeClass(): string
     {
         return Allowances::class;
+    }
+
+    protected function nodeName(): string
+    {
+        return Allowances::NODE_NAME;
     }
 
     public function test_all_properties_are_null_when_allowances_xml_is_empty(): void

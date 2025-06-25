@@ -14,13 +14,14 @@ use AdGroup\ReaxmlParser\Nodes\LinkedInUrl;
 use AdGroup\ReaxmlParser\Nodes\UniqueListingAgentId;
 use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 class ListingAgent
 {
     const NODE_NAME = "listingAgent";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     /** Expected values: 1 - 4 */
     public ?int $id = null;
@@ -42,15 +43,16 @@ class ListingAgent
     {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->mapNodes($node);
+        $this->parseExtraElements($node);
 
         $attributes = $node->attributes();
         $this->id = empty($attributes->id) ? null : $attributes->id->__toString();
         $this->displayAgentProfile = empty($attributes->displayAgentProfile) ? null : YesNoEnum::parse($attributes->displayAgentProfile->__toString());
     }
 
-    private function mapNodes(SimpleXMLElement $node): void
+    private function mapping(): array
     {
-        $mapping = [
+        return [
             AgentId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->agentId = new AgentId($node[0]),
             Name::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->name = new Name($node[0]),
             Telephone::NODE_NAME => function (?array $node) {
@@ -69,6 +71,15 @@ class ListingAgent
             UniqueListingAgentId::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->uniqueListingAgentId = new UniqueListingAgentId($node[0]),
             Media::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->media = new Media($node[0]),
         ];
+    }
+
+    protected function expectedXmlElements(): array {
+        return array_keys($this->mapping());
+    }
+
+    private function mapNodes(SimpleXMLElement $node): void
+    {
+        $mapping = $this->mapping();
 
         foreach ($mapping as $key => $callback) {
             $callback($node->xpath($key));

@@ -13,16 +13,22 @@ use AdGroup\ReaxmlParser\Nodes\LinkedInUrl;
 use AdGroup\ReaxmlParser\Nodes\UniqueListingAgentId;
 use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class ListingAgentTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     protected function nodeClass(): string
     {
         return ListingAgent::class;
+    }
+
+    protected function nodeName(): string
+    {
+        return ListingAgent::NODE_NAME;
     }
 
     public function test_all_elements_are_null_when_nochild_elements_are_present(): void

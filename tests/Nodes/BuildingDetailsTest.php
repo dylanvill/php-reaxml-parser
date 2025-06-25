@@ -5,19 +5,23 @@ namespace AdGroup\ReaxmlParser\Tests\Nodes;
 use AdGroup\ReaxmlParser\Nodes\Area;
 use AdGroup\ReaxmlParser\Nodes\BuildingDetails;
 use AdGroup\ReaxmlParser\Nodes\EnergyRating;
-use AdGroup\ReaxmlParser\Nodes\Min;
-use AdGroup\ReaxmlParser\Nodes\Range;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class BuildingDetailsTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     protected function nodeClass(): string
     {
         return BuildingDetails::class;
+    }
+
+    protected function nodeName(): string
+    {
+        return BuildingDetails::NODE_NAME;
     }
 
     public function test_area_is_null_when_there_is_no_area_node(): void

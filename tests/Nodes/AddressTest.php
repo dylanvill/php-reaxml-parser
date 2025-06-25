@@ -5,12 +5,13 @@ namespace AdGroup\ReaxmlParser\Tests\Nodes;
 use AdGroup\ReaxmlParser\Enums\YesNoEnum;
 use AdGroup\ReaxmlParser\Nodes\Address;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
 class AddressTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     private Address $defaultTestAddress;
 
@@ -25,7 +26,7 @@ class AddressTest extends TestCase
     const LOT_NUMBER = "test lot number";
     const REGION = "test region";
 
-    private const DEFAULT_CHILD_NODES = [
+    const DEFAULT_CHILD_NODES = [
         [
             "name" => "subNumber",
             "value" => self::SUB_NUMBER,
@@ -81,12 +82,17 @@ class AddressTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->defaultTestAddress = new Address($this->generateXml("address", [], self::DEFAULT_CHILD_NODES));
+        $this->defaultTestAddress = new Address($this->generateXml(Address::NODE_NAME, [], self::DEFAULT_CHILD_NODES));
     }
 
     protected function nodeClass(): string
     {
         return Address::class;
+    }
+
+    protected function nodeName(): string
+    {
+        return Address::NODE_NAME;
     }
 
     public function test_has_the_correct_sub_number_value()
@@ -146,28 +152,28 @@ class AddressTest extends TestCase
 
     public function test_display_is_yes_when_display_attribute_is_yes()
     {
-        $xml = $this->generateXml("address", ["display" => "yes"], self::DEFAULT_CHILD_NODES);
+        $xml = $this->generateXml(Address::NODE_NAME, ["display" => "yes"], self::DEFAULT_CHILD_NODES);
         $address = new Address($xml);
         $this->assertEquals(YesNoEnum::YES->value, $address->display->value);
     }
 
     public function test_display_is_no_when_display_attribute_is_no()
     {
-        $xml = $this->generateXml("address", ["display" => "no"], self::DEFAULT_CHILD_NODES);
+        $xml = $this->generateXml(Address::NODE_NAME, ["display" => "no"], self::DEFAULT_CHILD_NODES);
         $address = new Address($xml);
         $this->assertEquals(YesNoEnum::NO->value, $address->display->value);
     }
 
     public function test_streetview_is_yes_when_streetview_attribute_is_yes()
     {
-        $xml = $this->generateXml("address", ["streetview" => "yes"], self::DEFAULT_CHILD_NODES);
+        $xml = $this->generateXml(Address::NODE_NAME, ["streetview" => "yes"], self::DEFAULT_CHILD_NODES);
         $address = new Address($xml);
         $this->assertEquals(YesNoEnum::YES->value, $address->streetview->value);
     }
 
     public function test_streetview_is_no_when_streetview_attribute_is_no()
     {
-        $xml = $this->generateXml("address", ["streetview" => "no"], self::DEFAULT_CHILD_NODES);
+        $xml = $this->generateXml(Address::NODE_NAME, ["streetview" => "no"], self::DEFAULT_CHILD_NODES);
         $address = new Address($xml);
         $this->assertEquals(YesNoEnum::NO->value, $address->streetview->value);
     }
