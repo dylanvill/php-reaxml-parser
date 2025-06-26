@@ -8,12 +8,18 @@ use AdGroup\ReaxmlParser\Nodes\Depth;
 use AdGroup\ReaxmlParser\Nodes\Frontage;
 use AdGroup\ReaxmlParser\Nodes\LandDetails;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class LandDetailsTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
+
+    protected function nodeName(): string
+    {
+        return LandDetails::NODE_NAME;
+    }
 
     protected function nodeClass(): string
     {

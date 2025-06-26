@@ -27,12 +27,13 @@ use AdGroup\ReaxmlParser\Nodes\AvailabilityLink;
 use AdGroup\ReaxmlParser\Nodes\ExtraFields;
 use AdGroup\ReaxmlParser\Nodes\Images;
 use AdGroup\ReaxmlParser\Nodes\Objects;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
 
 class HolidayRentalTest extends TestCase
 {
-    use TestsListingType;
+    use TestsListingType, TestsExtraElements;
 
     protected function nodeName(): string
     {

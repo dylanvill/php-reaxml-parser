@@ -4,6 +4,7 @@ namespace AdGroup\ReaxmlParser\Tests\Nodes;
 
 use AdGroup\ReaxmlParser\Nodes\Document;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsTextNode;

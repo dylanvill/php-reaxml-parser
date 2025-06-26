@@ -51,13 +51,14 @@ use AdGroup\ReaxmlParser\Nodes\Study;
 use AdGroup\ReaxmlParser\Nodes\Workshop;
 use AdGroup\ReaxmlParser\Nodes\OtherFeatures;
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 class Features
 {
     const NODE_NAME = "features";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     public ?Bedrooms $bedrooms = null;
     public ?Bathrooms $bathrooms = null;
@@ -112,11 +113,12 @@ class Features
     {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->mapNodes($node);
+        $this->parseExtraElements($node);
     }
 
-    private function mapNodes(SimpleXMLElement $node): void
+    private function mapping(): array
     {
-        $mapping = [
+        return [
             Bedrooms::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->bedrooms = new Bedrooms($node[0]),
             Bathrooms::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->bathrooms = new Bathrooms($node[0]),
             Ensuite::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->ensuite = new Ensuite($node[0]),
@@ -166,6 +168,16 @@ class Features
             Workshop::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->workshop = new Workshop($node[0]),
             OtherFeatures::NODE_NAME => fn(?array $node) => empty($node) ? null : $this->otherFeatures = new OtherFeatures($node[0]),
         ];
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return array_keys($this->mapping());
+    }
+
+    private function mapNodes(SimpleXMLElement $node): void
+    {
+        $mapping = $this->mapping();
 
         foreach ($mapping as $key => $callback) {
             $callback($node->xpath($key));

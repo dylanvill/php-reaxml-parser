@@ -7,13 +7,14 @@ use AdGroup\ReaxmlParser\Enums\YesNoEnum;
 use AdGroup\ReaxmlParser\Nodes\Price;
 use AdGroup\ReaxmlParser\Nodes\Range;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsTextNode;
 
 class PriceTest extends TestCase
 {
-    use TestsTextNode, TestsNodeValidation, GeneratesSampleXml;
+    use TestsTextNode, TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     protected function nodeName(): string
     {

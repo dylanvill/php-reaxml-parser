@@ -6,13 +6,14 @@ use AdGroup\ReaxmlParser\Nodes\Floorplan;
 use AdGroup\ReaxmlParser\Nodes\Img;
 use AdGroup\ReaxmlParser\Nodes\Document;
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 class Objects
 {
     const NODE_NAME = "objects";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     /** @var Array<Floorplan> */
     public ?array $floorplan = null;
@@ -27,6 +28,12 @@ class Objects
     {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->mapNodes($node);
+        $this->parseExtraElements($node);
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return [Floorplan::NODE_NAME, Img::NODE_NAME, Document::NODE_NAME];
     }
 
     private function mapNodes(SimpleXMLElement $node): void

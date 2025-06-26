@@ -7,12 +7,18 @@ use AdGroup\ReaxmlParser\Nodes\Name;
 use AdGroup\ReaxmlParser\Nodes\Telephone;
 use AdGroup\ReaxmlParser\Nodes\Email;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class VendorDetailsTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
+
+    protected function nodeName(): string
+    {
+        return VendorDetails::NODE_NAME;
+    }
 
     protected function nodeClass(): string
     {

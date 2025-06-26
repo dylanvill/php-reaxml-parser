@@ -7,13 +7,14 @@ use AdGroup\ReaxmlParser\Nodes\Frontage;
 use AdGroup\ReaxmlParser\Nodes\Depth;
 use AdGroup\ReaxmlParser\Nodes\CrossOver;
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 class LandDetails
 {
     const NODE_NAME = "landDetails";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     public ?Area $area = null;
     public ?Frontage $frontage = null;
@@ -25,11 +26,12 @@ class LandDetails
     {
         $this->validateNodeName(self::NODE_NAME, $node);
         $this->mapNodes($node);
+        $this->parseExtraElements($node);
     }
 
-    private function mapNodes(SimpleXMLElement $node): void
+    private function mapping(): array
     {
-        $mapping = [
+        return [
             Area::NODE_NAME => fn(?array $node) => empty($node) ? $this->area = null : $this->area = new Area($node[0]),
             Frontage::NODE_NAME => fn(?array $node) => empty($node) ? $this->frontage = null : $this->frontage = new Frontage($node[0]),
             Depth::NODE_NAME => function (?array $node) {
@@ -41,6 +43,21 @@ class LandDetails
             },
             CrossOver::NODE_NAME => fn(?array $node) => empty($node) ? $this->crossOver = null : $this->crossOver = new CrossOver($node[0]),
         ];
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return [
+            Area::NODE_NAME,
+            Frontage::NODE_NAME,
+            Depth::NODE_NAME,
+            CrossOver::NODE_NAME,
+        ];
+    }
+
+    private function mapNodes(SimpleXMLElement $node): void
+    {
+        $mapping = $this->mapping();
 
         foreach ($mapping as $key => $callback) {
             $callback($node->xpath($key));

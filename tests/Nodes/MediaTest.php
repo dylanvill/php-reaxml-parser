@@ -5,12 +5,18 @@ namespace AdGroup\ReaxmlParser\Tests\Nodes;
 use AdGroup\ReaxmlParser\Nodes\Attachment;
 use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class MediaTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
+
+    protected function nodeName(): string
+    {
+        return Media::NODE_NAME;
+    }
 
     protected function nodeClass(): string
     {

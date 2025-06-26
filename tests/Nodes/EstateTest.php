@@ -6,13 +6,13 @@ use AdGroup\ReaxmlParser\Nodes\Estate;
 use AdGroup\ReaxmlParser\Nodes\Name;
 use AdGroup\ReaxmlParser\Nodes\Stage;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
-use AdGroup\ReaxmlParser\Tests\Traits\TestsTextNode;
 use Orchestra\Testbench\TestCase;
 
 class EstateTest extends TestCase
 {
-    use TestsTextNode, TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     protected function nodeName(): string
     {
@@ -38,12 +38,12 @@ class EstateTest extends TestCase
             [
                 "name" => Name::NODE_NAME,
                 "attributes" => [],
-                "value" => ""
+                "value" => "name-test"
             ]
         ]);
         $estate = new Estate($xml);
 
-        $this->assertNull($estate->name);
+        $this->assertInstanceOf(Name::class, $estate->name);
     }
 
     public function test_stage_is_null_when_there_is_no_stage_element(): void
@@ -60,11 +60,11 @@ class EstateTest extends TestCase
             [
                 "name" => Stage::NODE_NAME,
                 "attributes" => [],
-                "value" => ""
+                "value" => "stage-test"
             ]
         ]);
         $estate = new Estate($xml);
 
-        $this->assertNull($estate->stage);
+        $this->assertInstanceOf(Stage::class, $estate->stage);
     }
 }

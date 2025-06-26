@@ -8,12 +8,13 @@ use AdGroup\ReaxmlParser\Nodes\SoldPrice;
 use AdGroup\ReaxmlParser\Nodes\Date;
 use AdGroup\ReaxmlParser\Nodes\SoldDate;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class SoldDetailsTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     protected function nodeName(): string
     {

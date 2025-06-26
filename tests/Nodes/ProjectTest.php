@@ -6,13 +6,18 @@ use AdGroup\ReaxmlParser\Nodes\Id;
 use AdGroup\ReaxmlParser\Nodes\Order;
 use AdGroup\ReaxmlParser\Nodes\Project;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
-use AdGroup\ReaxmlParser\Tests\Traits\TestsTextNode;
 
 class ProjectTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
+
+    protected function nodeName(): string
+    {
+        return Project::NODE_NAME;
+    }
 
     protected function nodeClass(): string
     {

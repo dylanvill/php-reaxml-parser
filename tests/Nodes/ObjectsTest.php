@@ -7,17 +7,22 @@ use AdGroup\ReaxmlParser\Nodes\Floorplan;
 use AdGroup\ReaxmlParser\Nodes\Img;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
-use AdGroup\ReaxmlParser\Tests\Traits\TestsTextNode;
 
 class ObjectsTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
 
     protected function nodeClass(): string
     {
         return Objects::class;
+    }
+
+    protected function nodeName(): string
+    {
+        return Objects::NODE_NAME;
     }
 
     public function test_properties_are_null_when_there_are_no_xml_elements(): void

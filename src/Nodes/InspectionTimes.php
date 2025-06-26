@@ -5,13 +5,14 @@ namespace AdGroup\ReaxmlParser\Nodes;
 use AdGroup\ReaxmlParser\Traits\HasText;
 use AdGroup\ReaxmlParser\Nodes\Inspection;
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 class InspectionTimes
 {
     const NODE_NAME = "inspectionTimes";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     /** @var Array<Inspection> */
     public ?array $inspection = null;
@@ -29,5 +30,11 @@ class InspectionTimes
                 }
             }
         }
+        $this->parseExtraElements($node);
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return [Inspection::NODE_NAME];
     }
 }

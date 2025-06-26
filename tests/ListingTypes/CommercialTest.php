@@ -48,12 +48,13 @@ use AdGroup\ReaxmlParser\Nodes\Images;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Miniweb;
 use AdGroup\ReaxmlParser\Nodes\PurchaseOrder;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
 
 class CommercialTest extends TestCase
 {
-    use TestsListingType;
+    use TestsListingType, TestsExtraElements;
 
     protected function nodeName(): string
     {

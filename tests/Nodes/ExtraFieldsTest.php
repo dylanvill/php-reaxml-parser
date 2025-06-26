@@ -5,12 +5,17 @@ namespace AdGroup\ReaxmlParser\Tests\Nodes;
 use AdGroup\ReaxmlParser\Nodes\EField;
 use AdGroup\ReaxmlParser\Nodes\ExtraFields;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class ExtraFieldsTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
+
+    protected function nodeName(): string {
+        return ExtraFields::NODE_NAME;
+    }
 
     protected function nodeClass(): string
     {

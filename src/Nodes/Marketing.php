@@ -3,13 +3,14 @@
 namespace AdGroup\ReaxmlParser\Nodes;
 
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 class Marketing
 {
     const NODE_NAME = "marketing";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     public ?Upgrade $upgrade = null;
 
@@ -20,5 +21,12 @@ class Marketing
         if (!empty($element)) {
             $this->upgrade = new Upgrade($element[0]);
         }
+
+        $this->parseExtraElements($node);
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return [Upgrade::NODE_NAME];
     }
 }

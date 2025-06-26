@@ -37,13 +37,14 @@ use AdGroup\ReaxmlParser\Nodes\IdealFor;
 use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Media;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsListingType;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
 
 class RuralTest extends TestCase
 {
-    use TestsListingType;
+    use TestsListingType, TestsExtraElements, TestsExtraElements;
 
     protected function nodeName(): string
     {

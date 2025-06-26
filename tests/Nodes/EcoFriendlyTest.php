@@ -8,12 +8,18 @@ use AdGroup\ReaxmlParser\Nodes\SolarHotWater;
 use AdGroup\ReaxmlParser\Nodes\SolarPanels;
 use AdGroup\ReaxmlParser\Nodes\WaterTank;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 use Orchestra\Testbench\TestCase;
 
 class EcoFriendlyTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
+
+    protected function nodeName(): string
+    {
+        return EcoFriendly::NODE_NAME;
+    }
 
     protected function nodeClass(): string
     {

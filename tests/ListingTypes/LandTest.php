@@ -35,13 +35,14 @@ use AdGroup\ReaxmlParser\Nodes\Views;
 use AdGroup\ReaxmlParser\Nodes\Objects;
 use AdGroup\ReaxmlParser\Nodes\Media;
 use AdGroup\ReaxmlParser\Nodes\Project;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsListingType;
 use Orchestra\Testbench\PHPUnit\TestCase;
 
 
 class LandTest extends TestCase
 {
-    use TestsListingType;
+    use TestsListingType, TestsExtraElements;
 
     protected function nodeName(): string
     {

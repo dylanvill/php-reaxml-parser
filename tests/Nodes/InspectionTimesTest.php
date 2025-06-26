@@ -5,12 +5,18 @@ namespace AdGroup\ReaxmlParser\Tests\Nodes;
 use AdGroup\ReaxmlParser\Nodes\InspectionTimes;
 use AdGroup\ReaxmlParser\Nodes\Inspection;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
+use AdGroup\ReaxmlParser\Tests\Traits\TestsExtraElements;
 use Orchestra\Testbench\TestCase;
 use AdGroup\ReaxmlParser\Tests\Traits\TestsNodeValidation;
 
 class InspectionTimesTest extends TestCase
 {
-    use TestsNodeValidation, GeneratesSampleXml;
+    use TestsNodeValidation, GeneratesSampleXml, TestsExtraElements;
+
+    protected function nodeName(): string
+    {
+        return InspectionTimes::NODE_NAME;
+    }
 
     protected function nodeClass(): string
     {

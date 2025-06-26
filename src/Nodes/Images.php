@@ -4,13 +4,14 @@ namespace AdGroup\ReaxmlParser\Nodes;
 
 use AdGroup\ReaxmlParser\Nodes\Img;
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 use SimpleXMLElement;
 
 class Images
 {
     const NODE_NAME = "images";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     /** @var Array<Img> */
     public ?array $img = null;
@@ -26,5 +27,12 @@ class Images
                 $this->img[] = new Img($element);
             }
         }
+
+        $this->parseExtraElements($node);
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return [Img::NODE_NAME];
     }
 }

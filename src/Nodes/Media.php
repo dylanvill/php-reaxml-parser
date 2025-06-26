@@ -5,12 +5,13 @@ namespace AdGroup\ReaxmlParser\Nodes;
 use SimpleXMLElement;
 use AdGroup\ReaxmlParser\Nodes\Attachment;
 use AdGroup\ReaxmlParser\Traits\HasNodeValidation;
+use AdGroup\ReaxmlParser\Traits\ParsesExtraElements;
 
 class Media
 {
     const NODE_NAME = "media";
 
-    use HasNodeValidation;
+    use HasNodeValidation, ParsesExtraElements;
 
     /** @var Array<Attachment> */
     public ?array $attachment = null;
@@ -28,5 +29,12 @@ class Media
                 }
             }
         }
+
+        $this->parseExtraElements($node);
+    }
+
+    protected function expectedXmlElements(): array
+    {
+        return [Attachment::NODE_NAME];
     }
 }
