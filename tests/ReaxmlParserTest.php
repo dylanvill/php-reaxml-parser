@@ -4,7 +4,11 @@ namespace AdGroup\ReaxmlParser\Tests;
 
 use AdGroup\ReaxmlParser\Dtos\PropertyList;
 use AdGroup\ReaxmlParser\Exceptions\IncorrectNodeArgument;
+use AdGroup\ReaxmlParser\ListingTypes\Commercial;
+use AdGroup\ReaxmlParser\ListingTypes\Land;
+use AdGroup\ReaxmlParser\ListingTypes\Rental;
 use AdGroup\ReaxmlParser\ListingTypes\Residential;
+use AdGroup\ReaxmlParser\ListingTypes\Rural;
 use AdGroup\ReaxmlParser\ReaxmlParser;
 use AdGroup\ReaxmlParser\Tests\Traits\GeneratesSampleXml;
 use Orchestra\Testbench\PHPUnit\TestCase;
@@ -15,18 +19,30 @@ class ReaxmlParserTest extends TestCase
     use GeneratesSampleXml;
 
     const SAMPLE_XMLS = [
+        "commercial" => "commercial_sample.xml",
+        "land" => "land_sample.xml",
+        "rental" => "rental_sample.xml",
         "residential" => "residential_sample.xml",
-        "empty" => "empty_sample.xml"
+        "rural" => "rural_sample.xml",
+        "empty" => "empty_sample.xml",
     ];
 
+    private SimpleXMLElement $commercial;
+    private SimpleXMLElement $land;
+    private SimpleXMLElement $rental;
     private SimpleXMLElement $residential;
+    private SimpleXMLElement $rural;
     private SimpleXMLElement $empty;
 
     public function setUp(): void
     {
         parent::setUp();
 
+        $this->commercial = simplexml_load_file($this->sampleXmlPath("commercial"));
+        $this->land = simplexml_load_file($this->sampleXmlPath("land"));
+        $this->rental = simplexml_load_file($this->sampleXmlPath("rental"));
         $this->residential = simplexml_load_file($this->sampleXmlPath("residential"));
+        $this->rural = simplexml_load_file($this->sampleXmlPath("rural"));
         $this->empty = simplexml_load_file($this->sampleXmlPath("empty"));
     }
 
@@ -61,6 +77,33 @@ class ReaxmlParserTest extends TestCase
         $this->assertEquals(true, $listing->noListings());
     }
 
+    public function test_commercial_property_only_contains_commercial_instances(): void
+    {
+        $listing = (new ReaxmlParser())->parse($this->commercial);
+
+        foreach ($listing->commercial as $commercial) {
+            $this->assertInstanceOf(Commercial::class, $commercial);
+        }
+    }
+
+    public function test_land_property_only_contains_land_instances(): void
+    {
+        $listing = (new ReaxmlParser())->parse($this->land);
+
+        foreach ($listing->land as $land) {
+            $this->assertInstanceOf(Land::class, $land);
+        }
+    }
+
+    public function test_rental_property_only_contains_rental_instances(): void
+    {
+        $listing = (new ReaxmlParser())->parse($this->rental);
+
+        foreach ($listing->rental as $rental) {
+            $this->assertInstanceOf(Rental::class, $rental);
+        }
+    }
+
     public function test_residential_property_only_contains_residential_instances(): void
     {
         $listing = (new ReaxmlParser())->parse($this->residential);
@@ -69,6 +112,16 @@ class ReaxmlParserTest extends TestCase
             $this->assertInstanceOf(Residential::class, $residential);
         }
     }
+
+    public function test_rural_property_only_contains_rural_instances(): void
+    {
+        $listing = (new ReaxmlParser())->parse($this->rural);
+
+        foreach ($listing->rural as $rural) {
+            $this->assertInstanceOf(Rural::class, $rural);
+        }
+    }
+
 
     /**
      * 2. Test that the "commercial" property only contains the correct listing type instances
