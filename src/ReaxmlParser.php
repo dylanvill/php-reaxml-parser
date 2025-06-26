@@ -2,9 +2,7 @@
 
 namespace AdGroup\ReaxmlParser;
 
-use AdGroup\ReaxmlParser\Contracts\ListingType;
 use AdGroup\ReaxmlParser\Dtos\PropertyList;
-use AdGroup\ReaxmlParser\Exceptions\InvalidListingNameException;
 use AdGroup\ReaxmlParser\Helpers\PropertyListBuilder;
 use AdGroup\ReaxmlParser\ListingTypes\Commercial;
 use AdGroup\ReaxmlParser\ListingTypes\HolidayRental;
