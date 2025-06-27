@@ -2,6 +2,9 @@
   "name": "ad-group/laravel-reaxml-parser",
   "version": "0.0.1",
   "description": "Creates PHP objects out of REAXML files",
+  "require": {
+    "php": "^8.0"
+  },
   "autoload": {
     "psr-4": {
       "AdGroup\\ReaxmlParser\\": "src/"
